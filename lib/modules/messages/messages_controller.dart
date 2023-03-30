@@ -5,13 +5,36 @@ import 'package:get/get.dart';
 import 'package:healthcare_app_doctor/models/chats/chat_response.dart';
 import 'package:healthcare_app_doctor/models/chats/message_request.dart';
 import 'package:healthcare_app_doctor/repository/chat.repository.dart';
-
+import 'package:healthcare_app_doctor/service/socket_service.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 
 class MessagesController extends GetxController {
   var chatRepository = Get.find<ChatRepository>();
   var contentController = TextEditingController();
 
   RxList<DataMessageResponse> listMessage = RxList<DataMessageResponse>([]);
+  var socketService = Get.find<SocketService>();
+
+  // @override
+  @override
+  void onInit() {
+    super.onInit();
+    socketService.socket.onConnect((data) {
+      print('Connected to Socket.io server');
+      socketService.socket.on('newMessage', (msg) {
+        // MessageResponse msga = msg;
+        // print('Received message data: ${data['data']}');
+        try {
+          DataMessageResponse messageResponse =
+              DataMessageResponse.fromJson(msg['data']);
+
+          listMessage.add(messageResponse);
+        } catch (e) {
+          print('errr: ${e}');
+        }
+      });
+    });
+  }
 
   void initListMessage(String id, Function onComplete) async {
     final response = await chatRepository.getMessage(id, 1, 20);
@@ -27,8 +50,6 @@ class MessagesController extends GetxController {
   }
 
   void postMessage(String id, String content) async {
-    // final client = RestClient(dio);
-
     try {
       await chatRepository
           .postMessage(id,

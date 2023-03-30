@@ -3,6 +3,10 @@ import 'package:healthcare_app_doctor/modules/blood_pressure/blood_pressure_bind
 import 'package:healthcare_app_doctor/modules/blood_pressure/blood_pressure_page.dart';
 import 'package:healthcare_app_doctor/modules/bmi/bmi_binding.dart';
 import 'package:healthcare_app_doctor/modules/bmi/bmi_page.dart';
+import 'package:healthcare_app_doctor/modules/calendar/calendar_binding.dart';
+import 'package:healthcare_app_doctor/modules/calendar/calendar_page.dart';
+import 'package:healthcare_app_doctor/modules/call/call_binding.dart';
+import 'package:healthcare_app_doctor/modules/call/call_page.dart';
 import 'package:healthcare_app_doctor/modules/cholesterol/cholesterol_binding.dart';
 import 'package:healthcare_app_doctor/modules/cholesterol/cholesterol_page.dart';
 import 'package:healthcare_app_doctor/modules/glucose/glucose_binding.dart';
@@ -59,11 +63,11 @@ class AppPages {
     //     page: () => PersonalPage(),
     //     binding: PersonalBinding(),
     //   ),
-    //    GetPage(
-    //     name: AppRoutes.APPOINMENT_PAGE,
-    //     page: () => AppointmentForm(),
-    //     binding: DoctorBinding(),
-    //   ),
+    GetPage(
+      name: AppRoutes.CALENDAR_PAGE,
+      page: () => CalendarPage(),
+      binding: CalendarBinding(),
+    ),
     //   // GetPage(
     //   //   name: AppRoutes.MESSAGE_PAGE,
     //   //   page: () => MessagesPage(chat: ,),
@@ -74,11 +78,11 @@ class AppPages {
     //     page: () => ChatGPTScreen(),
     //     binding: ChatGptBinding(),
     //   ),
-    //   GetPage(
-    //     name: AppRoutes.HEALTH_RECORD_PAGE,
-    //     page: () => HealthRecordPage(),
-    //     binding: HealthRecordBinding(),
-    //   ),
+    // GetPage(
+    //   name: AppRoutes.CALL_PAGE,
+    //   page: () => CallPage(),
+    //   binding: CallBinding(),
+    // ),
     GetPage(
       name: AppRoutes.BLOOD_PRESSURE_PAGE,
       page: () => BloodPressurePage(),

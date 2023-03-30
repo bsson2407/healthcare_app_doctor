@@ -1,26 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:healthcare_app_doctor/models/user/patients_response.dart';
+import 'package:healthcare_app_doctor/modules/infor/infor_controller.dart';
 
-class ProfilePage extends StatefulWidget {
-  final DataPatientResponse? user;
+class ProfilePage extends StatelessWidget {
 
-  const ProfilePage({
-    Key? key,
-    this.user,
-  }) : super(key: key);
+    final inforController = Get.find<InforController>();
 
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  DataPatientResponse? _user;
-
-   @override
-  void initState() {
-    super.initState();
-    _user = widget.user;
-  }
 
   // void setUserData(DataPatientResponse user) {
   //   setState(() {
@@ -30,7 +16,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    print("_xxxx__${ widget.user?.fullName}");
     return Container(
       child: SingleChildScrollView(
         child: Padding(
@@ -49,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               const SizedBox(height: 20),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(_user?.fullName ?? "",
+                Text(inforController.user?.fullName ?? "",
                     style: const TextStyle(
                         fontSize: 22, fontWeight: FontWeight.bold)),
                 const SizedBox(width: 6),
@@ -94,8 +79,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 const Text('Giới tính: ',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 Text(
-                    _user?.gender != null
-                        ? _user?.gender == 'MALE'
+                    inforController.user?.gender != null
+                        ? inforController.user?.gender == 'MALE'
                             ? "Nam"
                             : "Nữ"
                         : "",
@@ -106,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Row(children: [
                 const Text('Số điện thoại: ',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                Text(_user?.phone.toString() ?? "",
+                Text(inforController.user?.phone.toString() ?? "",
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.w400))
               ]),
@@ -114,7 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Row(children: [
                 const Text('Địa chỉ: ',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                Text(_user?.address ?? "",
+                Text(inforController.user?.address ?? "",
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.w400))
               ]),
@@ -122,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Row(children: [
                 const Text('Công việc: ',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                Text(_user?.job ?? "",
+                Text(inforController.user?.job ?? "",
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.w400))
               ]),
@@ -130,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Row(children: [
                 const Text('Số bảo hiểm: ',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                Text(_user?.insuranceNumber ?? "",
+                Text(inforController.user?.insuranceNumber ?? "",
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.w400))
               ]),
@@ -138,7 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Row(children: [
                 const Text('Lịch sử bệnh: ',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                Text(_user?.medicalHistory ?? "",
+                Text(inforController.user?.medicalHistory ?? "",
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.w400))
               ]),
@@ -146,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Row(children: [
                 const Text('Trạng thái: ',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                Text(_user?.state ?? "",
+                Text(inforController.user?.state ?? "",
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.w400))
               ]),

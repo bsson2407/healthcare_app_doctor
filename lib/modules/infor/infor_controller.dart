@@ -15,7 +15,6 @@ class InforController extends GetxController {
     super.onInit();
 
     user = Get.arguments; // nhận tham số user
-    print('_sss__${user?.fullName}');
 
     loadData(user?.id);
   }

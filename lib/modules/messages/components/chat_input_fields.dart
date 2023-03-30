@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:healthcare_app_doctor/modules/messages/messages_controller.dart';
 import 'package:healthcare_app_doctor/service/local_storage_service.dart';
 import 'package:healthcare_app_doctor/utils/constant.dart';
-
+import 'package:image_picker/image_picker.dart';
 
 class ChatInputField extends StatefulWidget {
   const ChatInputField({Key? key}) : super(key: key);
@@ -83,13 +83,22 @@ class _ChatInputField extends State<ChatInputField> {
                   !isChange
                       ? Row(
                           children: [
-                            Icon(
-                              Icons.attach_file,
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1
-                                  ?.color
-                                  ?.withOpacity(0.64),
+                            InkWell(
+                              onTap: () async {
+                                XFile? image = await ImagePicker().pickImage(
+                                    source: ImageSource.gallery,
+                                    maxWidth: 400,
+                                    imageQuality: 50);
+                                ;
+                              },
+                              child: Icon(
+                                Icons.attach_file,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    ?.color
+                                    ?.withOpacity(0.64),
+                              ),
                             ),
                             SizedBox(width: kDefaultPadding / 4),
                             Icon(

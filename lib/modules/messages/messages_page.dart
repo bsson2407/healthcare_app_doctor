@@ -5,45 +5,34 @@ import 'package:healthcare_app_doctor/models/chats/conversation_response.dart';
 import 'package:healthcare_app_doctor/modules/messages/components/chat_input_fields.dart';
 import 'package:healthcare_app_doctor/modules/messages/components/message.dart';
 import 'package:healthcare_app_doctor/modules/messages/messages_controller.dart';
+import 'package:healthcare_app_doctor/service/local_storage_service.dart';
 import 'package:healthcare_app_doctor/utils/constant.dart';
 
-
-class MessagesPage extends StatefulWidget {
+class MessagesPage extends StatelessWidget {
   MessagesPage({
     Key? key,
     required this.chat,
   }) : super(key: key);
-  final DataConversationResponse chat;
-  @override
-  _MessagesPage createState() => _MessagesPage();
-}
 
-var messagesController = Get.find<MessagesController>();
-
-class _MessagesPage extends State<MessagesPage> {
+  var messagesController = Get.find<MessagesController>();
   DataConversationResponse? chat;
-
-  @override
-  void initState() {
-    super.initState();
-    chat = widget.chat;
-    messagesController.listMessage;
-  }
+  var userId = LocalStorageService.getId();
 
   // @override
   Widget build(BuildContext context) {
-    var t = print('***${messagesController.listMessage.length}****');
     return Scaffold(
       appBar: buildAppBar(),
       body: Column(
         children: [
           Expanded(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-            child: ListView.builder(
-              itemCount: messagesController.listMessage.length,
-              itemBuilder: (context, index) =>
-                  Message(message: messagesController.listMessage[index]),
+              child: Obx(
+            () => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+              child: ListView.builder(
+                itemCount: messagesController.listMessage.length,
+                itemBuilder: (context, index) =>
+                    Message(message: messagesController.listMessage[index]),
+              ),
             ),
           )),
           ChatInputField()
@@ -53,7 +42,7 @@ class _MessagesPage extends State<MessagesPage> {
   }
 
   AppBar buildAppBar() {
-    var user = chat?.member.firstWhere((m) => m.user?.id != id)?.user;
+    var user = chat?.member.firstWhere((m) => m.user?.id != userId)?.user;
     return AppBar(
       automaticallyImplyLeading: false,
       title: Row(

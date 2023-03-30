@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:healthcare_app_doctor/modules/calendar/calendar_page.dart';
 import 'package:healthcare_app_doctor/modules/chat/chat_page.dart';
 import 'package:healthcare_app_doctor/modules/home/home_pages.dart';
 import 'package:healthcare_app_doctor/modules/main-navigation/main_navigation_controller.dart';
@@ -34,7 +35,7 @@ class _MainNavigationState extends State<MainNavigation> {
             children: [
               HomePage(),
               ChatPage(),
-              Container(),
+              CalendarPage(),
               NotificationPage(),
               PersonalPage()
             ],

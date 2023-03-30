@@ -6,13 +6,6 @@ import 'package:healthcare_app_doctor/widgets/sortable_page.dart';
 import 'package:intl/intl.dart';
 
 class InforTable extends StatelessWidget {
-  InforTable({
-    Key? key,
-    this.id,
-  }) : super(key: key);
-   final String? id;
-
- 
   final inforController = Get.find<InforController>();
 
   //  List<DataResponse> lst  =  inforController.initList(id) as List<DataResponse>;
@@ -20,9 +13,7 @@ class InforTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return Scaffold(
-        body: ScrollableWidget(
-            child: buildDataTable(inforController.dataList)),
-        
+        body: ScrollableWidget(child: buildDataTable(inforController.dataList)),
       );
     });
   }
@@ -70,7 +61,6 @@ class InforTable extends StatelessWidget {
         data.cholesterol,
         data.glucose
       ];
-
 
       return DataRow(cells: getCells(cells));
     }).toList();

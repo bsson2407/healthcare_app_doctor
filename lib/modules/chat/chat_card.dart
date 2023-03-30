@@ -22,6 +22,7 @@ class ChatCard extends StatelessWidget {
 
   _cardItem(DataConversationResponse chat) {
     var user = chat.member.firstWhere((m) => m.user?.id != id)?.user;
+
     DateTime? date = chat.updatedAt;
     var inputFormat = DateFormat('dd/MM/yyyy').format(date!);
 

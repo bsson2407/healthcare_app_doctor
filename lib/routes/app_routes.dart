@@ -10,7 +10,7 @@ class AppRoutes {
   static const String CHAT_GPT_PAGE = "/chat_gpt_page";
   static const String HEALTH_RECORD_PAGE = "/health_record_page";
   static const String PERSONAL_PAGE = "/personal_page";
-  static const String DOCTOR_PAGE = "/doctor_page";
+  static const String CALENDAR_PAGE = "/calendar_page";
   static const String MESSAGE_PAGE = "/message_page";
   static const String BLOOD_PRESSURE_PAGE = "/blood_pressure_page";
   static const String BMI_PAGE = "/bmi_page";
@@ -19,5 +19,5 @@ class AppRoutes {
   static const String CHOLESTEROL_PAGE = "/cholesterol_page";
   static const String NOTIFICATION_PAGE = "/notification_page";
   static const String APPOINMENT_PAGE = "/appointment_page";
-
+  static const String CALL_PAGE = "/call_page";
 }

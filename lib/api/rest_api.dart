@@ -1,6 +1,6 @@
 import 'dart:io';
 
-
+import 'package:healthcare_app_doctor/models/appointment/appointment_get_response.dart';
 import 'package:healthcare_app_doctor/models/chats/chat_response.dart';
 import 'package:healthcare_app_doctor/models/chats/message_request.dart';
 import 'package:healthcare_app_doctor/models/chats/message_response.dart';
@@ -43,10 +43,15 @@ abstract class RestClient {
   // Future<AppointmentGetResponse> postAppointment(
   //     @Body() AppointmentRequest dto);
 
-  // @PUT('appointment/{id}/cancel')
-  // Future<AppointmentGetResponse> cancelAppointment(
-  //   @Path("id") String id,
-  // );
+  @PUT('appointment/{id}/refuse')
+  Future<AppointmentGetResponse> refuseAppointment(
+    @Path("id") String id,
+  );
+
+  @PUT('appointment/{id}/approve')
+  Future<AppointmentGetResponse> approveAppointment(
+    @Path("id") String id,
+  );
 
   // @GET('get-bmi')
   // Future<HealthRecordResponse> getBmi();
@@ -71,7 +76,8 @@ abstract class RestClient {
       @Query("pageSize") int pageSize, @Query("page") int page);
 
   @POST('chat/{id}')
-  Future<MessageResponse> postChat(@Path("id") String id,@Body() MessageRequest dto);
+  Future<MessageResponse> postChat(
+      @Path("id") String id, @Body() MessageRequest dto);
 
   // @GET('health-record-member')
   // Future<HealthRecordResponse> getHealthRecordAllDay();

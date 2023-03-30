@@ -7,7 +7,6 @@ import 'package:healthcare_app_doctor/modules/messages/components/text_message.d
 import 'package:healthcare_app_doctor/service/local_storage_service.dart';
 import 'package:healthcare_app_doctor/utils/constant.dart';
 
-
 import 'audio_message.dart';
 import 'video_message.dart';
 
@@ -20,9 +19,9 @@ class Message extends StatelessWidget {
   final DataMessageResponse message;
   @override
   Widget build(BuildContext context) {
-  var id = LocalStorageService.getId();
-  bool isSender = (message.createdBy == id) as bool;
-
+    var id = LocalStorageService.getId();
+    bool isSender = (message.createdBy == id) as bool;
+    
     Widget messageContaint(DataMessageResponse message) {
       switch (message.typeMessage) {
         case 'TEXT':

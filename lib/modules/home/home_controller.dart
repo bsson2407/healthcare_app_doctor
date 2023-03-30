@@ -16,7 +16,6 @@ class HomeController extends GetxController {
     final response = await userRepository.getPatients(1, 20);
     if (response.statusCode == 200) {
       // listBmi = response.data;
-      print('___${response.data}___');
       lstPatients.clear();
       lstPatients.addAll(response.data);
     } else {
