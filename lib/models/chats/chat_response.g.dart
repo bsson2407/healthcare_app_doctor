@@ -27,6 +27,10 @@ DataMessageResponse _$DataMessageResponseFromJson(Map<String, dynamic> json) =>
       conversationId: json['conversationId'] as String?,
       typeMessage: json['typeMessage'] as String?,
       content: json['content'] as String?,
+      file: (json['file'] as List<dynamic>?)
+          ?.map((e) =>
+              DataFileMessageResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
@@ -46,6 +50,7 @@ Map<String, dynamic> _$DataMessageResponseToJson(
       'content': instance.content,
       'createdBy': instance.createdBy,
       'createdAt': instance.createdAt?.toIso8601String(),
+      'file': instance.file,
       'user': instance.user,
     };
 
@@ -63,4 +68,22 @@ Map<String, dynamic> _$DataUserMessageResponseToJson(
       'id': instance.id,
       'fullName': instance.fullName,
       'avatar': instance.avatar,
+    };
+
+DataFileMessageResponse _$DataFileMessageResponseFromJson(
+        Map<String, dynamic> json) =>
+    DataFileMessageResponse(
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+      messageId: json['messageId'] as String?,
+      url: json['url'] as String?,
+    );
+
+Map<String, dynamic> _$DataFileMessageResponseToJson(
+        DataFileMessageResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'url': instance.url,
+      'name': instance.name,
+      'messageId': instance.messageId,
     };

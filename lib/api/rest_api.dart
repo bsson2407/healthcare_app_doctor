@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:dio/dio.dart';
 import 'package:healthcare_app_doctor/models/appointment/appointment_get_response.dart';
 import 'package:healthcare_app_doctor/models/chats/chat_response.dart';
 import 'package:healthcare_app_doctor/models/chats/message_request.dart';
@@ -10,7 +9,6 @@ import 'package:healthcare_app_doctor/models/notifications/notification_response
 import 'package:healthcare_app_doctor/models/user/user_response.dart';
 import 'package:healthcare_app_doctor/service/local_storage_service.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:dio/dio.dart';
 
 part 'rest_api.g.dart';
 

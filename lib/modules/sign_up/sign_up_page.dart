@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:healthcare_app_doctor/components/auth_button.dart';
@@ -46,7 +45,7 @@ class SignUpPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 200.h),
+                  SizedBox(height: 200),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -56,7 +55,7 @@ class SignUpPage extends StatelessWidget {
                             signUpController.firstNameController),
                       ),
                       SizedBox(
-                        width: 20.w,
+                        width: 20,
                       ),
                       SizedBox(
                         width: Get.width / 2.8,

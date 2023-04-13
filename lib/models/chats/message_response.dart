@@ -27,7 +27,7 @@ class DataSendMessageResponse {
   String? content;
   DateTime? createdAt;
   String? createdBy;
-  List<String>? file;
+  List<DataFileSendMessageResponse>? file;
   DataUserSendMessageResponse? user;
 
   DataSendMessageResponse(
@@ -56,4 +56,18 @@ class DataUserSendMessageResponse {
   factory DataUserSendMessageResponse.fromJson(Map<String, dynamic> json) =>
       _$DataUserSendMessageResponseFromJson(json);
   Map<String, dynamic> toJson() => _$DataUserSendMessageResponseToJson(this);
+}
+
+@JsonSerializable()
+class DataFileSendMessageResponse {
+  String? id;
+  String? url;
+  String? name;
+  String? messageId;
+
+  DataFileSendMessageResponse({this.id, this.name, this.messageId, this.url});
+
+  factory DataFileSendMessageResponse.fromJson(Map<String, dynamic> json) =>
+      _$DataFileSendMessageResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$DataFileSendMessageResponseToJson(this);
 }

@@ -17,7 +17,7 @@ class InforPage extends StatelessWidget {
   Widget build(BuildContext context) => TabBarWidget(
         title: 'Thông tin bệnh nhân',
         tabs: const [
-          Tab(icon: Icon(Icons.table_chart), text: 'Thông tin'),
+          Tab(icon: Icon(Icons.person), text: 'Thông tin'),
           Tab(icon: Icon(Icons.table_chart), text: 'Bảng'),
           Tab(icon: Icon(Icons.bar_chart), text: 'Biểu đồ'),
         ],

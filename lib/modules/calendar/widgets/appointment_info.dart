@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:healthcare_app_doctor/modules/calendar/widgets/appointment_dialog.dart';
-import 'package:healthcare_app_doctor/routes/app_routes.dart';
-// import 'avatar_image.dart';
 import 'package:intl/intl.dart';
-// import 'package:healthcare_mobile/modules/dialog/fancy_dialog.dart';
+import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 class AppointmentInfo extends StatelessWidget {
   const AppointmentInfo(this.data, {Key? key, this.onTap}) : super(key: key);
@@ -43,7 +40,9 @@ class AppointmentInfo extends StatelessWidget {
       default:
         break;
     }
-
+    print("-__-====1_${DateTime.now().day}");
+    print("-__-====2_${date.day}");
+    print("-__-====3_${DateTime.now().day == data?.dateMeeting}");
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -143,12 +142,19 @@ class AppointmentInfo extends StatelessWidget {
                       height: 6,
                     ),
                     Container(
-                      child: ElevatedButton(
-                        child: Text("Tạo phòng"),
-                        onPressed: () {
-                          Get.toNamed(AppRoutes.CALL_PAGE);
-                        },
-                      ),
+                      child: (DateTime.now().day == date.day)
+                          ? ElevatedButton(
+                              child: const Text("Tạo phòng"),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return CallPage(callID: data?.id);
+                                  }),
+                                );
+                              },
+                            )
+                          : const SizedBox(),
                     ),
                   ],
                 )
@@ -157,6 +163,26 @@ class AppointmentInfo extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CallPage extends StatelessWidget {
+  const CallPage({Key? key, required this.callID}) : super(key: key);
+  final String callID;
+  @override
+  Widget build(BuildContext context) {
+    return ZegoUIKitPrebuiltCall(
+      appID:
+          909621478, // Fill in the appID that you  get from ZEGOCLOUD Admin Console.
+      appSign:
+          "111b58d37fa7d7903d411169d42a0d92671455cde73e341869b65f650174c669", // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
+      userID: 'user_id',
+      userName: 'user_name',
+      callID: callID,
+      // You can also use groupVideo/groupVoice/oneOnOneVoice to make more types of calls.
+      config: ZegoUIKitPrebuiltCallConfig.oneOnOneVideoCall()
+        ..onOnlySelfInRoom = (context) => Navigator.of(context).pop(),
     );
   }
 }

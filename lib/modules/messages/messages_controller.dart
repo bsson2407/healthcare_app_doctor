@@ -1,3 +1,4 @@
+import 'package:chewie/chewie.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -6,11 +7,16 @@ import 'package:healthcare_app_doctor/models/chats/chat_response.dart';
 import 'package:healthcare_app_doctor/models/chats/message_request.dart';
 import 'package:healthcare_app_doctor/repository/chat.repository.dart';
 import 'package:healthcare_app_doctor/service/socket_service.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:socket_io_client/socket_io_client.dart';
+import 'package:video_player/video_player.dart';
 
 class MessagesController extends GetxController {
   var chatRepository = Get.find<ChatRepository>();
   var contentController = TextEditingController();
+  late VideoPlayerController videoPlayerController;
+  late ChewieController chewieController;
+  var isDisposed = false.obs;
 
   RxList<DataMessageResponse> listMessage = RxList<DataMessageResponse>([]);
   var socketService = Get.find<SocketService>();
@@ -36,6 +42,26 @@ class MessagesController extends GetxController {
     });
   }
 
+  void initVideoMessage(DataMessageResponse message) {
+    print("123___${message.file![0].url}");
+    videoPlayerController =
+        VideoPlayerController.network(message.file![0].url as String);
+    print("___${videoPlayerController.value.isInitialized}");
+    chewieController = ChewieController(
+      videoPlayerController: videoPlayerController,
+      aspectRatio: 16 / 9, // tỷ lệ khung hình của video
+      autoPlay: true, // tự động phát video khi khởi động
+      looping: true, // lặp lại video khi phát xong
+    );
+  }
+
+  @override
+  void onClose() {
+    videoPlayerController.dispose();
+    chewieController.dispose();
+    super.onClose();
+  }
+
   void initListMessage(String id, Function onComplete) async {
     final response = await chatRepository.getMessage(id, 1, 20);
 
@@ -46,6 +72,27 @@ class MessagesController extends GetxController {
       onComplete();
     } else {
       // Xử lý khi API trả về lỗi
+    }
+  }
+
+  void upload(List<XFile> files, String id, String type) async {
+    try {
+      if (files.isNotEmpty) {
+        List<String> lst = [];
+        await chatRepository.upload(files).then((value) {
+          for (var val in value) {
+            lst.add(val.id);
+          }
+        });
+
+        await chatRepository
+            .postMessage(
+                id, MessageRequest(typeMessage: type, content: "", file: lst))
+            .then((value) {});
+        print('12345_${lst.length}');
+      }
+    } on DioError catch (e) {
+      EasyLoading.showError(e.response?.data['message']);
     }
   }
 

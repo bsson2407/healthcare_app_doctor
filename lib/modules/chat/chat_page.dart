@@ -8,7 +8,6 @@ import 'package:healthcare_app_doctor/routes/app_routes.dart';
 import 'package:healthcare_app_doctor/service/local_storage_service.dart';
 import 'package:healthcare_app_doctor/utils/constant.dart';
 
-
 import 'chat_card.dart';
 
 class ChatPage extends StatelessWidget {
@@ -34,24 +33,6 @@ class ChatPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Column(children: [
-        Container(
-          padding: const EdgeInsets.fromLTRB(
-              kDefaultPadding, 0, kDefaultPadding, kDefaultPadding * 0.75),
-          color: kPrimaryColor,
-          child: Row(
-            children: [
-              FillOutlineButton(press: () {}, text: 'Message'),
-              const SizedBox(width: kDefaultPadding),
-              FillOutlineButton(
-                press: () {
-                  Get.toNamed(AppRoutes.CHAT_GPT_PAGE);
-                },
-                text: 'Chat AI',
-                isFilled: false,
-              ),
-            ],
-          ),
-        ),
         Expanded(
           child: ListView.builder(
             itemCount: chatController.listConversation.length,

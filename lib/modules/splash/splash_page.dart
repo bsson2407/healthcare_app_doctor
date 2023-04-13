@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:healthcare_app_doctor/routes/app_routes.dart';
 import 'package:lottie/lottie.dart';
@@ -40,23 +39,23 @@ class _SplashPageState extends State<SplashPage> {
               children: [
                 Image.asset(
                   "assets/icons/logo.png",
-                  height: 150.h,
-                  width: 150.h,
+                  height: 50,
+                  width: 50,
                 ),
                 SizedBox(
-                  width: 50.w,
+                  width: 50,
                 ),
                 Text(
                   "Healthcare",
                   style: TextStyle(
                       color: Colors.blue,
-                      fontSize: 150.sp,
+                      fontSize: 50,
                       fontWeight: FontWeight.bold),
                 ),
               ],
             ),
             SizedBox(
-              height: 100.h,
+              height: 100,
             ),
             _buildAnimations(),
           ],

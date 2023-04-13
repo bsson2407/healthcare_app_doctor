@@ -27,7 +27,6 @@ class _CalendarTimeState extends State<CalendarTime> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print("__123213");
           _controller.jumpToDate(DateTime.now());
 
           setState(() {});
@@ -82,15 +81,6 @@ class _CalendarTimeState extends State<CalendarTime> {
                     decoration: Icon(
                       Icons.today,
                       color: Colors.blue,
-                    )),
-                DecorationItem(
-                    date: DateTime.now().add(Duration(days: 3)),
-                    decoration: Text(
-                      'Holiday',
-                      style: TextStyle(
-                        color: Colors.brown,
-                        fontWeight: FontWeight.w600,
-                      ),
                     )),
               ],
             )),

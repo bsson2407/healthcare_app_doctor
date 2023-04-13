@@ -14,7 +14,7 @@ class TextMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var id = LocalStorageService.getId();
-    bool isSender = (message.createdBy == id) as bool;
+    bool isSender = (message.createdBy == id);
     return Container(
       padding: const EdgeInsets.symmetric(
           horizontal: kDefaultPadding * 0.75, vertical: kDefaultPadding / 2),

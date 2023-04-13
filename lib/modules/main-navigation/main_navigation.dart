@@ -71,8 +71,8 @@ class _MainNavigationState extends State<MainNavigation> {
               label: 'Hội thoại',
             ),
             _bottomNavigationBarItem(
-              icon: Icons.local_hospital,
-              label: 'Bác sĩ',
+              icon: Icons.calendar_month,
+              label: 'Cuộc hẹn',
             ),
             _bottomNavigationBarItem(
               icon: Icons.notifications,

@@ -34,7 +34,10 @@ DataSendMessageResponse _$DataSendMessageResponseFromJson(
           ? null
           : DateTime.parse(json['createdAt'] as String),
       createdBy: json['createdBy'] as String?,
-      file: (json['file'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      file: (json['file'] as List<dynamic>?)
+          ?.map((e) =>
+              DataFileSendMessageResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
       user: json['user'] == null
           ? null
           : DataUserSendMessageResponse.fromJson(
@@ -68,4 +71,22 @@ Map<String, dynamic> _$DataUserSendMessageResponseToJson(
       'id': instance.id,
       'avatar': instance.avatar,
       'fullName': instance.fullName,
+    };
+
+DataFileSendMessageResponse _$DataFileSendMessageResponseFromJson(
+        Map<String, dynamic> json) =>
+    DataFileSendMessageResponse(
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+      messageId: json['messageId'] as String?,
+      url: json['url'] as String?,
+    );
+
+Map<String, dynamic> _$DataFileSendMessageResponseToJson(
+        DataFileSendMessageResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'url': instance.url,
+      'name': instance.name,
+      'messageId': instance.messageId,
     };

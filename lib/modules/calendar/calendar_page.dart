@@ -10,8 +10,8 @@ class CalendarPage extends StatelessWidget {
   Widget build(BuildContext context) => TabBarWidget(
         title: 'Thông tin cuộc hẹn',
         tabs: const [
-          Tab(icon: Icon(Icons.table_chart), text: 'Thông tin'),
-          Tab(icon: Icon(Icons.table_chart), text: 'Bảng'),
+          Tab(icon: Icon(Icons.calendar_view_day), text: 'Cuộc hẹn'),
+          Tab(icon: Icon(Icons.calendar_today), text: 'Lịch'),
         ],
         children: [
           CalendarList(),
