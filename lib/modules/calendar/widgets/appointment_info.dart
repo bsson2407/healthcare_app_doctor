@@ -146,6 +146,8 @@ class AppointmentInfo extends StatelessWidget {
                           ? ElevatedButton(
                               child: const Text("Tạo phòng"),
                               onPressed: () {
+                                print("data ____${data?.id}");
+
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) {
@@ -177,12 +179,12 @@ class CallPage extends StatelessWidget {
           909621478, // Fill in the appID that you  get from ZEGOCLOUD Admin Console.
       appSign:
           "111b58d37fa7d7903d411169d42a0d92671455cde73e341869b65f650174c669", // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
-      userID: 'user_id',
-      userName: 'user_name',
+      userID: '456',
+      userName: 'doctor',
       callID: callID,
       // You can also use groupVideo/groupVoice/oneOnOneVoice to make more types of calls.
-      config: ZegoUIKitPrebuiltCallConfig.oneOnOneVideoCall()
-        ..onOnlySelfInRoom = (context) => Navigator.of(context).pop(),
+      config: ZegoUIKitPrebuiltCallConfig.groupVideoCall()
+        // ..onOnlySelfInRoom = (context) => Navigator.of(context).pop(),
     );
   }
 }

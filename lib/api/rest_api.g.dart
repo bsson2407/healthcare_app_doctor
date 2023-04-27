@@ -68,6 +68,35 @@ class _RestClient implements RestClient {
   }
 
   @override
+  Future<AppointmentGetResponse> postAppointment(
+    doctorId,
+    timeDate,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'doctorId': doctorId,
+      r'timeDate': timeDate.toJson(),
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AppointmentGetResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'appointment-time',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AppointmentGetResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<AppointmentGetResponse> refuseAppointment(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

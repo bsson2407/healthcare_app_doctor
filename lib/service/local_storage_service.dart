@@ -1,6 +1,6 @@
+import 'package:get/get.dart';
 import 'package:healthcare_app_doctor/utils/share_pref_constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:get/get.dart';
 
 class LocalStorageService extends GetxService {
   static late final SharedPreferences instance;

@@ -37,10 +37,6 @@ abstract class RestClient {
   // @GET('get-appointment-patient')
   // Future<AppointmentResponse> getAppointmentPatient();
 
-  // @POST('appointment')
-  // Future<AppointmentGetResponse> postAppointment(
-  //     @Body() AppointmentRequest dto);
-
   @PUT('appointment/{id}/refuse')
   Future<AppointmentGetResponse> refuseAppointment(
     @Path("id") String id,

@@ -7,6 +7,8 @@ import 'package:healthcare_app_doctor/modules/calendar/calendar_binding.dart';
 import 'package:healthcare_app_doctor/modules/calendar/calendar_page.dart';
 import 'package:healthcare_app_doctor/modules/call/call_binding.dart';
 import 'package:healthcare_app_doctor/modules/call/call_page.dart';
+import 'package:healthcare_app_doctor/modules/change-password/change_password_binding.dart';
+import 'package:healthcare_app_doctor/modules/change-password/change_password_page.dart';
 import 'package:healthcare_app_doctor/modules/cholesterol/cholesterol_binding.dart';
 import 'package:healthcare_app_doctor/modules/cholesterol/cholesterol_page.dart';
 import 'package:healthcare_app_doctor/modules/glucose/glucose_binding.dart';
@@ -19,6 +21,10 @@ import 'package:healthcare_app_doctor/modules/login/login_binding.dart';
 import 'package:healthcare_app_doctor/modules/login/login_page.dart';
 import 'package:healthcare_app_doctor/modules/main-navigation/main_navigation.dart';
 import 'package:healthcare_app_doctor/modules/main-navigation/main_navigation_binding.dart';
+import 'package:healthcare_app_doctor/modules/personal-info/personal_info_binding.dart';
+import 'package:healthcare_app_doctor/modules/personal-info/personal_info_pages.dart';
+import 'package:healthcare_app_doctor/modules/personal-update/personal_update_binding.dart';
+import 'package:healthcare_app_doctor/modules/personal-update/personal_update_pages.dart';
 import 'package:healthcare_app_doctor/modules/sign_up/sign_up_binding.dart';
 import 'package:healthcare_app_doctor/modules/sign_up/sign_up_page.dart';
 import 'package:healthcare_app_doctor/modules/splash/splash_binding.dart';
@@ -113,5 +119,25 @@ class AppPages {
     //     page: () => NotificationPage(),
     //     binding: NotificationBinding(),
     //   ),
+    GetPage(
+      name: AppRoutes.CHANGE_PASSWORD_PAGE,
+      page: () => ChangePasswordPage(),
+      binding: ChangePasswordBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.PERSONAL_INFO_PAGE,
+      binding: PersonalInfoBinding(),
+      page: () => PersonalInfoPage(),
+    ),
+    // GetPage(
+    //   name: AppRoutes.OTP_PAGE,
+    //   binding: OtpBinding(),
+    //   page: () => OtpPage(),
+    // ),
+    GetPage(
+      name: AppRoutes.PERSONAL_UPDATE_PAGE,
+      binding: PersonalUpdateBinding(),
+      page: () => PersonalUpdatePage(),
+    ),
   ];
 }

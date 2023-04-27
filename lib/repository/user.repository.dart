@@ -5,7 +5,7 @@ import 'package:healthcare_app_doctor/models/login/login_response.dart';
 import 'package:healthcare_app_doctor/models/user/patients_response.dart';
 import 'package:healthcare_app_doctor/models/user/user_response.dart';
 import 'package:healthcare_app_doctor/service/local_storage_service.dart';
-
+import 'package:intl/intl.dart';
 
 class UserRepository {
   final dio = Dio(); // Provide a dio instance
@@ -20,7 +20,7 @@ class UserRepository {
     return await client.loginUser(login);
   }
 
-Future<PatientResponse> getPatients(
+  Future<PatientResponse> getPatients(
     int? page,
     int? pageSize,
   ) async {
@@ -42,16 +42,55 @@ Future<PatientResponse> getPatients(
 
     return PatientResponse.fromJson(response.data);
   }
-  // Future<DoctorResponse> getDoctorById(String id) async {
-  //   final client = RestClient(dio);
-  //   return await client.getDoctorById(id);
-  // }
 
-  // Future<void> logout() async {
-  //   final client = RestClient(dio);
-  //   return await client.logout();
-  // }
+  Future<Response> changePassword(
+    String? oldPassword,
+    String? newPassword,
+    String? confirmNewPassword,
+  ) async {
+    // if (status != null) {
+    //   queryParams['status'] = status;
+    // }
+    dio.options = BaseOptions();
+    dio.options.headers['Authorization'] =
+        "Bearer ${LocalStorageService.getAccessToken()}";
 
+    final response =
+        await dio.patch('http://10.0.2.2:5000/v1/user/change-password', data: {
+      "oldPassword": oldPassword,
+      "newPassword": newPassword,
+      "confirmNewPassword": confirmNewPassword,
+    });
+
+    return response;
+  }
+
+  Future<UserResponse> update(
+      String fullName,
+      String address,
+      String gender,
+      DateTime dateOfBirth,
+      String experience,
+      String specialize,
+      String workPlace,
+      String description) async {
+    dio.options = BaseOptions();
+    dio.options.headers['Authorization'] =
+        "Bearer ${LocalStorageService.getAccessToken()}";
+    String formattedDate = DateFormat("yyyy-MM-dd").format(dateOfBirth);
+    final response = await dio.patch('http://10.0.2.2:5000/v1/doctor', data: {
+      "fullName": fullName,
+      "address": address,
+      "gender": gender,
+      "dateOfBirth": formattedDate,
+      "experience": experience,
+      "specialize": specialize,
+      "workPlace": workPlace,
+      "description": description,
+    });
+
+    return UserResponse.fromJson(response.data);
+  }
   // Future<List<UserResponse>> searchUserInWorkspace(
   //     String keyword, int workspace, int boardId) async {
   //   final client = RestClient(dio);
