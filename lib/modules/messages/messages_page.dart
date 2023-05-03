@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:healthcare_app_doctor/models/chats/conversation_response.dart';
 import 'package:healthcare_app_doctor/modules/messages/components/chat_input_fields.dart';
@@ -42,7 +41,7 @@ class MessagesPage extends StatelessWidget {
   }
 
   AppBar buildAppBar() {
-    var user = chat?.member.firstWhere((m) => m.user?.id != userId)?.user;
+    var user = chat?.member.firstWhere((m) => m.user?.id != userId).user;
     return AppBar(
       automaticallyImplyLeading: false,
       title: Row(
@@ -63,9 +62,15 @@ class MessagesPage extends StatelessWidget {
         ],
       ),
       actions: [
-        IconButton(onPressed: () {}, icon: Icon(Icons.call)),
-        IconButton(onPressed: () {}, icon: Icon(Icons.videocam)),
-        SizedBox(
+        // IconButton(onPressed: () {}, icon: Icon(Icons.call)),
+        IconButton(
+            onPressed: () {
+              messagesController.callVideo(
+                  chat?.id ?? "", userId, user?.id ?? "");
+              LocalStorageService.setCallName(user?.fullName as String);
+            },
+            icon: const Icon(Icons.videocam)),
+        const SizedBox(
           width: kDefaultPadding / 2,
         )
       ],

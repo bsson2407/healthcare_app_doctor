@@ -42,6 +42,5 @@ class BmiController extends GetxController {
 //   void initListBmi() async {
 //     await healthRecordRepository.getBmi().then((value) => listBmi = value.data);
 
-//     print(listBmi);
 //   }
 // }

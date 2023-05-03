@@ -8,14 +8,8 @@ import 'package:healthcare_app_doctor/modules/notification/notification_pages.da
 import 'package:healthcare_app_doctor/modules/personal/personal_pages.dart';
 
 
-class MainNavigation extends StatefulWidget {
-  const MainNavigation({Key? key}) : super(key: key);
+class MainNavigation extends StatelessWidget {
 
-  @override
-  State<MainNavigation> createState() => _MainNavigationState();
-}
-
-class _MainNavigationState extends State<MainNavigation> {
   int selectedPage = 0;
   final pages = [
     HomePage(),

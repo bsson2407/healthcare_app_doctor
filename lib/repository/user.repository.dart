@@ -3,21 +3,46 @@ import 'package:healthcare_app_doctor/api/rest_api.dart';
 import 'package:healthcare_app_doctor/models/login/login_request.dart';
 import 'package:healthcare_app_doctor/models/login/login_response.dart';
 import 'package:healthcare_app_doctor/models/user/patients_response.dart';
+import 'package:healthcare_app_doctor/models/user/person_response.dart';
 import 'package:healthcare_app_doctor/models/user/user_response.dart';
 import 'package:healthcare_app_doctor/service/local_storage_service.dart';
 import 'package:intl/intl.dart';
 
 class UserRepository {
   final dio = Dio(); // Provide a dio instance
-
+  // String domain = "http://10.0.2.2:5000/v1";
+  String domain = "https://healthcarebe-production.up.railway.app/v1";
   Future<UserResponse> getMe() async {
     final client = RestClient(dio);
     return await client.getMe();
   }
 
+  // Future<LoginResponse> loginUser(LoginRequest login) async {
+  //   final client = RestClient(dio);
+  //   return await client.loginUser(login);
+  // }
+
   Future<LoginResponse> loginUser(LoginRequest login) async {
-    final client = RestClient(dio);
-    return await client.loginUser(login);
+    Dio dios = new Dio();
+    // dio.options = BaseOptions();
+    // dio.options.headers['Authorization'] =
+    //     "Bearer ${LocalStorageService.getAccessToken()}";
+    final response = await dios.post(
+        '$domain/auth/user/login',
+        data: {"phone": login.phone, "password": login.password});
+
+    return LoginResponse.fromJson(response.data);
+  }
+
+  Future<PersonResponse> getPerson(String id) async {
+    dio.options = BaseOptions();
+    dio.options.headers['Authorization'] =
+        "Bearer ${LocalStorageService.getAccessToken()}";
+
+    final response = await dio.get(
+      '$domain/user/me/$id',
+    );
+    return PersonResponse.fromJson(response.data);
   }
 
   Future<PatientResponse> getPatients(
@@ -36,7 +61,7 @@ class UserRepository {
         "Bearer ${LocalStorageService.getAccessToken()}";
 
     final response = await dio.get(
-      'http://10.0.2.2:5000/v1/doctor/patients',
+      '$domain/doctor/patients',
       queryParameters: queryParams,
     );
 
@@ -55,12 +80,13 @@ class UserRepository {
     dio.options.headers['Authorization'] =
         "Bearer ${LocalStorageService.getAccessToken()}";
 
-    final response =
-        await dio.patch('http://10.0.2.2:5000/v1/user/change-password', data: {
-      "oldPassword": oldPassword,
-      "newPassword": newPassword,
-      "confirmNewPassword": confirmNewPassword,
-    });
+    final response = await dio.patch(
+        '$domain/user/change-password',
+        data: {
+          "oldPassword": oldPassword,
+          "newPassword": newPassword,
+          "confirmNewPassword": confirmNewPassword,
+        });
 
     return response;
   }
@@ -78,16 +104,18 @@ class UserRepository {
     dio.options.headers['Authorization'] =
         "Bearer ${LocalStorageService.getAccessToken()}";
     String formattedDate = DateFormat("yyyy-MM-dd").format(dateOfBirth);
-    final response = await dio.patch('http://10.0.2.2:5000/v1/doctor', data: {
-      "fullName": fullName,
-      "address": address,
-      "gender": gender,
-      "dateOfBirth": formattedDate,
-      "experience": experience,
-      "specialize": specialize,
-      "workPlace": workPlace,
-      "description": description,
-    });
+    final response = await dio.patch(
+        '$domain/doctor',
+        data: {
+          "fullName": fullName,
+          "address": address,
+          "gender": gender,
+          "dateOfBirth": formattedDate,
+          "experience": experience,
+          "specialize": specialize,
+          "workPlace": workPlace,
+          "description": description,
+        });
 
     return UserResponse.fromJson(response.data);
   }

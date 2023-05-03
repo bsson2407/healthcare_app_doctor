@@ -32,9 +32,10 @@ class LoginController extends GetxController {
             .then((value) {
           LocalStorageService.setAccessToken(
               value.data?.access_token as String);
-              LocalStorageService.setRefreshToken(
+          LocalStorageService.setRefreshToken(
               value.data?.refresh_token as String);
           LocalStorageService.setPhone(phone);
+          LocalStorageService.setId(value.data?.memberId as String);
           LocalStorageService.setPassword(password);
 
           Get.offAllNamed(AppRoutes.MAIN_NAVIGATION);

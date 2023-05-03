@@ -40,9 +40,6 @@ class AppointmentInfo extends StatelessWidget {
       default:
         break;
     }
-    print("-__-====1_${DateTime.now().day}");
-    print("-__-====2_${date.day}");
-    print("-__-====3_${DateTime.now().day == data?.dateMeeting}");
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -146,8 +143,6 @@ class AppointmentInfo extends StatelessWidget {
                           ? ElevatedButton(
                               child: const Text("Tạo phòng"),
                               onPressed: () {
-                                print("data ____${data?.id}");
-
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) {

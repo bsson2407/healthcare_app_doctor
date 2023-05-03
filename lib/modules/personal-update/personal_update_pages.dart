@@ -7,21 +7,59 @@ import 'package:intl/intl.dart';
 
 enum Gender { MALE, FEMALE }
 
-final personalController = Get.find<PersonalController>();
-
 class PersonalUpdatePage extends StatelessWidget {
+  final personalController = Get.find<PersonalController>();
   PersonalUpdatePage({Key? key}) : super(key: key);
-  final personalUpdateController = Get.find<PersonalUpdateController>();
-  DateTime _selectedDate = personalController.time ?? DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     Rx<Gender> _character = personalController.gender == "MALE"
         ? Gender.MALE.obs
         : Gender.FEMALE.obs;
-    // String gender = personalController.user?.gender == "MALE" ? "Nam" : "Nữ";
-    // DateTime? dateOfBirth = personalController.user?.dateOfBirth!;
-    // var inputFormat = DateFormat('dd/MM/yyyy').format(dateOfBirth!);
+    final personalUpdateController = Get.find<PersonalUpdateController>();
+    DateTime _selectedDate = personalController.time ?? DateTime.now();
+
+    Future<void> _selectDate(BuildContext context) async {
+      final DateTime? picked = await showDatePicker(
+          context: context,
+          initialDate: _selectedDate,
+          firstDate: DateTime(1990, 8),
+          lastDate: DateTime(2101));
+      if (picked != null && picked != _selectedDate) {
+        // setState(() {
+        _selectedDate = picked;
+        personalController.dateController.text =
+            DateFormat.yMd().format(_selectedDate);
+        // });
+      }
+    }
+
+    _buildDateField(TextEditingController controller, BuildContext context) {
+      return TextFormField(
+        autofocus: false,
+        controller: controller,
+        obscureText: false,
+        enableSuggestions: false,
+        autocorrect: false,
+        onSaved: (save) {
+          controller.text = save!;
+        },
+        validator: (value) {
+          return null;
+        },
+        textInputAction: TextInputAction.done,
+        decoration: InputDecoration(
+            labelText: 'Ngày sinh',
+            prefixIcon: const Icon(Icons.calendar_today),
+            contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+            )),
+        onTap: () => {
+          _selectDate(context),
+        },
+      );
+    }
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -162,24 +200,21 @@ class PersonalUpdatePage extends StatelessWidget {
                                     ),
                                   ),
                             onClick: () {
-                              print(
-                                  "personalController.dateController___${personalController.dateController.text}");
 
                               DateTime date = DateFormat("dd/MM/yyyy").parse(
                                   personalController.dateController.text);
 
-                              print("date___${date}");
-                              personalUpdateController.updatePersonal(
-                                  personalController.fullNameController.text,
-                                  personalController.addressController.text,
-                                  _character.value == Gender.MALE
-                                      ? "MALE"
-                                      : "FEMALE",
-                                  _selectedDate,
-                                  personalController.experienceController.text,
-                                  personalController.specializeController.text,
-                                  personalController.workPlaceController.text,
-                                  personalController.descriptionController.text);
+                              // personalUpdateController.updatePersonal(
+                              //     personalController.fullNameController.text,
+                              //     personalController.addressController.text,
+                              //     _character.value == Gender.MALE
+                              //         ? "MALE"
+                              //         : "FEMALE",
+                              //     _selectedDate,
+                              //     personalController.experienceController.text,
+                              //     personalController.specializeController.text,
+                              //     personalController.workPlaceController.text,
+                              //     personalController.descriptionController.text);
                               // String email = signUpController.emailController.text;
                               // String password =
                               //     signUpController.passwordController.text;
@@ -235,47 +270,5 @@ class PersonalUpdatePage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  _buildDateField(TextEditingController controller, BuildContext context) {
-    return TextFormField(
-      autofocus: false,
-      controller: controller,
-      obscureText: false,
-      enableSuggestions: false,
-      autocorrect: false,
-      onSaved: (save) {
-        controller.text = save!;
-      },
-      validator: (value) {
-        return null;
-      },
-      textInputAction: TextInputAction.done,
-      decoration: InputDecoration(
-          labelText: 'Ngày sinh',
-          prefixIcon: const Icon(Icons.calendar_today),
-          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          )),
-      onTap: () => {
-        _selectDate(context),
-      },
-    );
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: _selectedDate,
-        firstDate: DateTime(1990, 8),
-        lastDate: DateTime(2101));
-    if (picked != null && picked != _selectedDate) {
-      // setState(() {
-      _selectedDate = picked;
-      personalController.dateController.text =
-          DateFormat.yMd().format(_selectedDate);
-      // });
-    }
   }
 }

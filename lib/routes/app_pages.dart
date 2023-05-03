@@ -7,6 +7,8 @@ import 'package:healthcare_app_doctor/modules/calendar/calendar_binding.dart';
 import 'package:healthcare_app_doctor/modules/calendar/calendar_page.dart';
 import 'package:healthcare_app_doctor/modules/call/call_binding.dart';
 import 'package:healthcare_app_doctor/modules/call/call_page.dart';
+import 'package:healthcare_app_doctor/modules/call_video/call_video_binding.dart';
+import 'package:healthcare_app_doctor/modules/call_video/call_video_page.dart';
 import 'package:healthcare_app_doctor/modules/change-password/change_password_binding.dart';
 import 'package:healthcare_app_doctor/modules/change-password/change_password_page.dart';
 import 'package:healthcare_app_doctor/modules/cholesterol/cholesterol_binding.dart';
@@ -129,11 +131,17 @@ class AppPages {
       binding: PersonalInfoBinding(),
       page: () => PersonalInfoPage(),
     ),
-    // GetPage(
-    //   name: AppRoutes.OTP_PAGE,
-    //   binding: OtpBinding(),
-    //   page: () => OtpPage(),
-    // ),
+    GetPage(
+      name: AppRoutes.CALL_PAGE,
+      binding: CallBinding(),
+      page: () => CallPage(),
+    ),
+
+     GetPage(
+      name: AppRoutes.CALL_VIDEO_PAGE,
+      binding: CallVideoBinding(),
+      page: () => CallScreen(),
+    ),
     GetPage(
       name: AppRoutes.PERSONAL_UPDATE_PAGE,
       binding: PersonalUpdateBinding(),

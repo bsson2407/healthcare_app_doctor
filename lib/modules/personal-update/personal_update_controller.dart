@@ -6,37 +6,35 @@ import 'package:healthcare_app_doctor/routes/app_routes.dart';
 
 class PersonalUpdateController extends GetxController {
   final userRepository = Get.find<UserRepository>();
-  final personalController = Get.find<PersonalController>();
+  // final personalController = Get.find<PersonalController>();
 
   // var formKey = GlobalKey<FormState>();
-  void updatePersonal(
-      String fullName,
-      String address,
-      String gender,
-      DateTime dateOfBirth,
-      String experience,
-      String specialize,
-      String workPlace,
-      String description
-      ) async {
-    // if (formKey.currentState!.validate()) {
-    try {
-      final response = await userRepository.update(fullName, address, gender,
-          dateOfBirth, experience, specialize, workPlace, description);
+  // void updatePersonal(
+  //     String fullName,
+  //     String address,
+  //     String gender,
+  //     DateTime dateOfBirth,
+  //     String experience,
+  //     String specialize,
+  //     String workPlace,
+  //     String description
+  //     ) async {
+  //   // if (formKey.currentState!.validate()) {
+  //   try {
+  //     final response = await userRepository.update(fullName, address, gender,
+  //         dateOfBirth, experience, specialize, workPlace, description);
 
-      if (response.statusCode == 200) {
-        final response = await userRepository
-            .getMe()
-            .then((value) => personalController.getMe())
-            .then((value) => Get.offNamed(AppRoutes.PERSONAL_INFO_PAGE));
-      }
-      //     .then((value) {
-      //   print("object__${value.data!.patient?.fullName}");
-      //   personalController.getInforPersonal();
-      // }).then((value) => Get.back());
-    } on DioError catch (e) {
-      print("response___${e}");
-    }
+  //     if (response.statusCode == 200) {
+  //       final response = await userRepository
+  //           .getMe()
+  //           .then((value) => personalController.getMe())
+  //           .then((value) => Get.offNamed(AppRoutes.PERSONAL_INFO_PAGE));
+  //     }
+  //     //     .then((value) {
+  //     //   personalController.getInforPersonal();
+  //     // }).then((value) => Get.back());
+  //   } on DioError catch (e) {
+  //   }
     // }
-  }
+  // }
 }

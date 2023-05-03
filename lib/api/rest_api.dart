@@ -12,10 +12,11 @@ import 'package:retrofit/retrofit.dart';
 
 part 'rest_api.g.dart';
 
-@RestApi(baseUrl: "http://10.0.2.2:5000/v1/")
+@RestApi(baseUrl: "https://healthcarebe-production.up.railway.app/v1/")
+// @RestApi(baseUrl: "http://10.0.2.2:5000/v1/")
 abstract class RestClient {
   factory RestClient(Dio dio, {String? baseUrl}) {
-    dio.options = BaseOptions(receiveTimeout: 60000, connectTimeout: 60000);
+    dio.options = BaseOptions();
     dio.options.headers['Authorization'] =
         "Bearer ${LocalStorageService.getAccessToken()}";
 

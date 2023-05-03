@@ -24,11 +24,11 @@ class FileMessage extends StatelessWidget {
         filePath.endsWith('.xlsx') ||
         filePath.endsWith('.csv')) {
       assets = 'assets/images/excel_icon.png';
-    } else if (filePath.endsWith('.doc')) {
+    } else if (filePath.endsWith('.doc') || filePath.endsWith('.docx')) {
       assets = 'assets/images/word_icon.png';
     }
     return Container(
-      width: MediaQuery.of(context).size.width * 0.55,
+      width: MediaQuery.of(context).size.width * 0.6,
       padding: const EdgeInsets.symmetric(
         horizontal: kDefaultPadding * 0.75,
         vertical: kDefaultPadding / 2.5,

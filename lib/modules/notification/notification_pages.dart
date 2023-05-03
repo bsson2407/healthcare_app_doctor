@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:healthcare_app_doctor/models/notifications/notification_response.dart';
 import 'package:healthcare_app_doctor/modules/notification/notification_controller.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NotificationPage extends StatelessWidget {
   var notificationController = Get.find<NotificationController>();
@@ -26,8 +27,8 @@ class NotificationPage extends StatelessWidget {
               return Slidable(
                 // actionPane: SlidableDrawerActionPane(),
                 // actionExtentRatio: 0.25,
-                child: notificationItem(
-                    notificationController.listNotification[index]),
+                child: Obx(() => notificationItem(
+                    notificationController.listNotification[index])),
                 // secondaryActions: <Widget>[
                 //   Container(
                 //       height: 60,
@@ -49,10 +50,10 @@ class NotificationPage extends StatelessWidget {
   }
 
   notificationItem(DataNotificationResponse notification) {
-    DateTime? date = notification?.createdAt;
+    DateTime? date = notification.createdAt;
     var inputFormat = DateFormat('dd/MM/yyyy').format(date!);
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.black,
@@ -87,12 +88,12 @@ class NotificationPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
-                      notification?.title ?? '',
-                      style: TextStyle(
+                      notification.title ?? '',
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold, // in đậm văn bản
                         fontSize: 18.0, // phóng to văn bản
                       ),
@@ -101,19 +102,32 @@ class NotificationPage extends StatelessWidget {
                           .ellipsis, // hiển thị ... khi văn bản vượt quá phạm vi
                       maxLines: 2, // giới hạn số dòng của văn bản
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
-                    Text(notification?.content ?? ''),
-                    SizedBox(
+                    Text(notification.content ?? ''),
+                    const SizedBox(
                       height: 8,
                     ),
+                    notification.typeNotification == "EMERGENCY"
+                        ? GestureDetector(
+                            onTap: () async {
+                              if (await canLaunch(notification.url ??
+                                  "https://www.google.com/maps/search/?api=1&query=10.8225079,106.6880955")) {
+                                await launch(notification.url ??
+                                    "https://www.google.com/maps/search/?api=1&query=10.8225079,106.6880955");
+                              } else {
+                                throw 'Could not launch ';
+                              }
+                            },
+                            child: Text("Địa chỉ cấp cứu"))
+                        : const SizedBox(),
                     Align(
                       alignment:
                           Alignment.bottomRight, // hoặc Alignment.bottomRight
                       child: Text(
-                        inputFormat ?? '',
-                        style: TextStyle(
+                        inputFormat,
+                        style: const TextStyle(
                           fontSize: 12,
                         ),
                       ),
@@ -123,25 +137,6 @@ class NotificationPage extends StatelessWidget {
               ),
             ),
           ),
-          // notification.postImage != '' ?
-          //   Container(
-          //     width: 50,
-          //     height: 50,
-          //     child: ClipRRect(
-          //       child: Image.network(notification.postImage)
-          //     ),
-          //   )
-          // : Container(
-          //     height: 35,
-          //     width: 110,
-          //     decoration: BoxDecoration(
-          //       color: Colors.blue[700],
-          //       borderRadius: BorderRadius.circular(5),
-          //     ),
-          //     child: Center(
-          //       child: Text('Follow', style: TextStyle(color: Colors.white))
-          //     )
-          //   ),
         ],
       ),
     );

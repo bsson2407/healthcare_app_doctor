@@ -24,10 +24,12 @@ class DataResponse {
   String access_token;
   String role;
   String refresh_token;
+  String memberId;
 
   DataResponse(
       {required this.access_token,
       required this.refresh_token,
+      required this.memberId,
       required this.role});
 
   factory DataResponse.fromJson(Map<String, dynamic> json) =>

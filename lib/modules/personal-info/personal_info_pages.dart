@@ -16,8 +16,6 @@ class PersonalInfoPage extends StatelessWidget {
     String gender = personalController.user?.gender == "MALE" ? "Nam" : "Nữ";
     DateTime? dateOfBirth = personalController.user?.dateOfBirth!;
     var inputFormat = DateFormat('dd/MM/yyyy').format(dateOfBirth!);
-    print(
-        "personalController.user?.fullName!__==${personalController.user?.fullName!}");
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

@@ -18,7 +18,8 @@ class PatientResponse {
       _$PatientResponseFromJson(json);
   Map<String, dynamic> toJson() => _$PatientResponseToJson(this);
 }
-
+//0353810417
+//0343220597
 @JsonSerializable()
 class DataPatientResponse {
   String? id;

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "294060158276",
+    "project_id": "chat-app-50a48",
+    "storage_bucket": "chat-app-50a48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294060158276:android:be2b346d54f2bc4456bb11",
+        "android_client_info": {
+          "package_name": "com.example.healcare_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "294060158276-mr9unp19u0us1cck7ri5r7sl0vpumv17.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.healcare_mobile",
+            "certificate_hash": "d40dc0def3e2ba5d955e026035c276279f402657"
+          }
+        },
+        {
+          "client_id": "294060158276-rc5tijnid3m9gcm67rn5usvele41s6tq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjFE8TXXtgcJdOxe-xW_fNeWMb4wG1i50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "294060158276-rc5tijnid3m9gcm67rn5usvele41s6tq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

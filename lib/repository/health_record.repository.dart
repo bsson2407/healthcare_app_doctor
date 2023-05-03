@@ -5,42 +5,8 @@ import 'package:healthcare_app_doctor/service/local_storage_service.dart';
 
 class HealthRecordRepository {
   final dio = Dio(); // Provide a dio instance
-
-  // Future<RecordDayResponse> postHealthRecord(
-  //     HealthRecordRequest dto) async {
-  //   final client = RestClient(dio);
-  //   return await client.postHealthRecord(dto);
-  // }
-
-  // Future<HealthRecordDayResponse> getHealthRecordDay() async {
-  //   final client = RestClient(dio);
-  //   return await client.getHealthRecordDay();
-  // }
-
-  // Future<HealthRecordResponse> getBmi() async {
-  //   final client = RestClient(dio);
-  //   return await client.getBmi();
-  // }
-
-  // Future<HealthRecordResponse> getBloodPressure() async {
-  //   final client = RestClient(dio);
-  //   return await client.getBloodPressure();
-  // }
-
-  // Future<HealthRecordResponse> getCholesterol() async {
-  //   final client = RestClient(dio);
-  //   return await client.getCholesterol();
-  // }
-
-  // Future<HealthRecordResponse> getHeartbeat() async {
-  //   final client = RestClient(dio);
-  //   return await client.getHeartbeat();
-  // }
-
-  // Future<HealthRecordResponse> getGlucose() async {
-  //   final client = RestClient(dio);
-  //   return await client.getGlucose();
-  // }
+  // String domain = "http://10.0.2.2:5000/v1";
+  String domain = "https://healthcarebe-production.up.railway.app/v1";
 
   Future<HealthRecordResponse> getHealthRecordPatient(
       int? page, int? pageSize, String? patientId) async {
@@ -57,7 +23,7 @@ class HealthRecordRepository {
         "Bearer ${LocalStorageService.getAccessToken()}";
 
     final response = await dio.get(
-      'http://10.0.2.2:5000/v1/doctor/health-record-patient',
+      '$domain/doctor/health-record-patient',
       queryParameters: queryParams,
     );
 

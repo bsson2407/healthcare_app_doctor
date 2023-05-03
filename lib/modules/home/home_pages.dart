@@ -118,7 +118,7 @@ class HomePage extends StatelessWidget {
                     children: [
                       const SizedBox(height: 40),
                       Text(
-                        user?.fullName ?? "", //podcast name
+                        user.fullName ?? "", //podcast name
                         style: GoogleFonts.openSans(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,

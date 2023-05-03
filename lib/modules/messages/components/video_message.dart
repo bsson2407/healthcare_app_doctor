@@ -38,8 +38,6 @@ class _VideoMessageState extends State<VideoMessage> {
       looping: true,
     );
 
-    print("videoPlayerController:${videoPlayerController}");
-    // print("chewieController:${videoPlayerController}");
     setState(() {});
   }
 
@@ -52,10 +50,6 @@ class _VideoMessageState extends State<VideoMessage> {
 
   @override
   Widget build(BuildContext context) {
-    print("message.file:${widget.message.file![0].url}");
-
-    print("chewieController:${chewieController}");
-    print("check:${chewieController != null}");
     return Container(
       height: 200,
       width: 300,

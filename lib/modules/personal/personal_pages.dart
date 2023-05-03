@@ -2,16 +2,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healthcare_app_doctor/modules/personal/personal_controller.dart';
+import 'package:healthcare_app_doctor/routes/app_routes.dart';
 import 'package:healthcare_app_doctor/utils/constant.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/cupertino.dart';
+
 // import 'package:url_launcher/url_launcher.dart';
+final personalController = Get.find<PersonalController>();
 
 class PersonalPage extends StatelessWidget {
   PersonalPage({Key? key}) : super(key: key);
-
-  final personalController = Get.find<PersonalController>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class PersonalPage extends StatelessWidget {
             height: 100,
             color: Colors.grey[200],
             child: Row(
-              children: const [
+              children: [
                 CircleAvatar(
                   radius: 50,
                   backgroundImage: NetworkImage(
@@ -37,7 +38,7 @@ class PersonalPage extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: kDefaultPadding),
                     child: Text(
-                      "Bùi Sỹ Sơn",
+                      personalController.user?.fullName! ?? "",
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
                     ),
@@ -47,73 +48,83 @@ class PersonalPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 50),
-          Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-            height: 70,
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-            ),
-            child: Row(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.person),
-                    const SizedBox(width: 10),
-                    Text(
-                      "Tài khoản",
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 18,
-                      ),
-                    )
-                  ],
-                ),
-                const Spacer(),
-                const Icon(
-                  CupertinoIcons.chevron_forward,
-                  color: Colors.black,
-                  size: 24,
-                )
-              ],
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(AppRoutes.PERSONAL_INFO_PAGE);
+            },
+            child: Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              height: 70,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+              ),
+              child: Row(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.person),
+                      const SizedBox(width: 10),
+                      Text(
+                        "Tài khoản",
+                        style: GoogleFonts.montserrat(
+                          color: Colors.black,
+                          fontSize: 18,
+                        ),
+                      )
+                    ],
+                  ),
+                  const Spacer(),
+                  const Icon(
+                    CupertinoIcons.chevron_forward,
+                    color: Colors.black,
+                    size: 24,
+                  )
+                ],
+              ),
             ),
           ),
           // const Divider(),
-          Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-            height: 70,
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-            ),
-            child: Row(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.lock),
-                    const SizedBox(width: 10),
-                    Text(
-                      "Đổi mật khẩu",
-                      style: GoogleFonts.montserrat(
-                        color: Colors.black,
-                        fontSize: 18,
-                        // letterSpacing: 1,
-                        // fontWeight: FontWeight.bold,
-                      ),
-                    )
-                  ],
-                ),
-                const Spacer(),
-                const Icon(
-                  CupertinoIcons.chevron_forward,
-                  color: Colors.black,
-                  size: 24,
-                )
-              ],
+          GestureDetector(
+            onTap: () {
+              Get.toNamed(AppRoutes.CHANGE_PASSWORD_PAGE);
+            },
+            child: Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+              height: 70,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+              ),
+              child: Row(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.lock),
+                      const SizedBox(width: 10),
+                      Text(
+                        "Đổi mật khẩu",
+                        style: GoogleFonts.montserrat(
+                          color: Colors.black,
+                          fontSize: 18,
+                          // letterSpacing: 1,
+                          // fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                  const Spacer(),
+                  const Icon(
+                    CupertinoIcons.chevron_forward,
+                    color: Colors.black,
+                    size: 24,
+                  )
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 10),

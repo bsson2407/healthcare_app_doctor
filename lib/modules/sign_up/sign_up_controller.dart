@@ -8,11 +8,17 @@ import 'package:get/get.dart';
 
 class SignUpController extends GetxController {
   var formKey = GlobalKey<FormState>();
-  var firstNameController = TextEditingController();
-  var lastNameController = TextEditingController();
-  var emailController = TextEditingController();
+  var fullNameController = TextEditingController();
+  var phoneController = TextEditingController();
   var passwordController = TextEditingController();
   var confirmPasswordController = TextEditingController();
+  var addressController = TextEditingController();
+  var emailController = TextEditingController();
+  var experienceController = TextEditingController();
+  var workPlaceController = TextEditingController();
+  var specializeController = TextEditingController();
+  var dateOfBirthController = TextEditingController();
+  var descriptionController = TextEditingController();
   var isObscurePassword = true.obs;
   var isObscureConfirmPassword = true.obs;
   var isLoadingButton = false.obs;

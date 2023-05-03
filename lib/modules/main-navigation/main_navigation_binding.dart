@@ -5,6 +5,8 @@ import 'package:healthcare_app_doctor/modules/home/home_controller.dart';
 import 'package:healthcare_app_doctor/modules/main-navigation/main_navigation_controller.dart';
 import 'package:healthcare_app_doctor/modules/messages/messages_controller.dart';
 import 'package:healthcare_app_doctor/modules/notification/notification_controller.dart';
+import 'package:healthcare_app_doctor/modules/personal-info/personal_info_controller.dart';
+import 'package:healthcare_app_doctor/modules/personal-update/personal_update_controller.dart';
 import 'package:healthcare_app_doctor/modules/personal/personal_controller.dart';
 import 'package:healthcare_app_doctor/service/socket_service.dart';
 
@@ -19,5 +21,7 @@ class MainNavigationBinding extends Bindings {
     Get.lazyPut<CalendarController>(() => CalendarController());
     Get.lazyPut<NotificationController>(() => NotificationController());
     Get.lazyPut<PersonalController>(() => PersonalController());
+    Get.lazyPut<PersonalInfoController>(() => PersonalInfoController());
+    // Get.lazyPut<PersonalUpdateController>(() => PersonalUpdateController());
   }
 }

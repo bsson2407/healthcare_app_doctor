@@ -229,7 +229,6 @@ Future<dynamic> selectFile() {
                 onTap: () async {
                   final video =
                       await picker.pickVideo(source: ImageSource.gallery);
-                  print('_+_+_+_+${video}');
                   List<XFile> arr = [];
                   arr.add(video!);
                   messagesController.upload(arr, id, 'VIDEO');
