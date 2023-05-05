@@ -21,32 +21,17 @@ class NotificationPage extends StatelessWidget {
           ),
           centerTitle: false,
         ),
-        body: ListView.builder(
+        body: Obx(() => ListView.builder(
+            controller: notificationController.scrollController,
             itemCount: notificationController.listNotification.length,
             itemBuilder: (context, index) {
               return Slidable(
                 // actionPane: SlidableDrawerActionPane(),
                 // actionExtentRatio: 0.25,
-                child: Obx(() => notificationItem(
-                    notificationController.listNotification[index])),
-                // secondaryActions: <Widget>[
-                //   Container(
-                //       height: 60,
-                //       color: Colors.grey.shade500,
-                //       child: Icon(
-                //         Icons.info_outline,
-                //         color: Colors.white,
-                //       )),
-                //   Container(
-                //       height: 60,
-                //       color: Colors.red,
-                //       child: Icon(
-                //         Icons.delete_outline_sharp,
-                //         color: Colors.white,
-                //       )),
-                // ],
+                child: notificationItem(
+                    notificationController.listNotification[index]),
               );
-            }));
+            })));
   }
 
   notificationItem(DataNotificationResponse notification) {

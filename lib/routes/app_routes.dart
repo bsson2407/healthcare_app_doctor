@@ -25,4 +25,7 @@ class AppRoutes {
   static const String OTP_PAGE = "/otp_page";
   static const String PERSONAL_UPDATE_PAGE = "/personal_update_page";
   static const String CHANGE_PASSWORD_PAGE = "/change_password_page";
+  static const String OTP_PASS_PAGE = "/otp_pass_page";
+  static const String PHONE_PASS_PAGE = "/phone_pass_page";
+  static const String RESET_PASSWORD_PAGE = "/reset_password_page";
 }

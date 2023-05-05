@@ -168,6 +168,14 @@ class PersonalUpdatePage extends StatelessWidget {
                           height: 20,
                         ),
                         Obx(() => _buildFullNameField(
+                            personalController.experienceController,
+                            "Kinh nghiệm",
+                            personalController.isCancelExperience,
+                            personalController.experience)),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Obx(() => _buildFullNameField(
                             personalController.descriptionController,
                             "Mô tả",
                             personalController.isCancelDescription,
@@ -204,21 +212,18 @@ class PersonalUpdatePage extends StatelessWidget {
                               DateTime date = DateFormat("dd/MM/yyyy").parse(
                                   personalController.dateController.text);
 
-                              // personalUpdateController.updatePersonal(
-                              //     personalController.fullNameController.text,
-                              //     personalController.addressController.text,
-                              //     _character.value == Gender.MALE
-                              //         ? "MALE"
-                              //         : "FEMALE",
-                              //     _selectedDate,
-                              //     personalController.experienceController.text,
-                              //     personalController.specializeController.text,
-                              //     personalController.workPlaceController.text,
-                              //     personalController.descriptionController.text);
-                              // String email = signUpController.emailController.text;
-                              // String password =
-                              //     signUpController.passwordController.text;
-                              // signUpController.signUp(email, password);
+                              personalUpdateController.updatePersonal(
+                                  personalController.fullNameController.text,
+                                  personalController.addressController.text,
+                                  _character.value == Gender.MALE
+                                      ? "MALE"
+                                      : "FEMALE",
+                                  _selectedDate,
+                                  personalController.experienceController.text,
+                                  personalController.specializeController.text,
+                                  personalController.workPlaceController.text,
+                                  personalController.descriptionController.text);
+                             
 
                               // Get.toNamed(AppRoutes.PERSONAL_INFO_PAGE);
                             },

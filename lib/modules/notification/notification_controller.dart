@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healthcare_app_doctor/models/notifications/notification_response.dart';
 import 'package:healthcare_app_doctor/repository/appointment.repository.dart';
@@ -9,10 +10,15 @@ class NotificationController extends GetxController {
   RxList<DataNotificationResponse> listNotification =
       RxList<DataNotificationResponse>([]);
   var socketService = Get.find<SocketService>();
-
+  RxBool isNoti = false.obs;
+  RxString content = "".obs;
+  RxString url = "".obs;
+  RxInt page = 1.obs;
+  final ScrollController scrollController = ScrollController();
   @override
   void onInit() {
     super.onInit();
+    scrollController.addListener(_scrollListener);
     socketService.socket.onConnect((data) {
       socketService.socket.on('newNotification', (msg) {
         // MessageResponse msga = msg;
@@ -21,19 +27,45 @@ class NotificationController extends GetxController {
               DataNotificationResponse.fromJson(msg['data']);
           // initListNotification();
           listNotification.add(messageResponse);
+
+          if (messageResponse.typeNotification == "EMERGENCY") {
+            isNoti.value = true;
+            content.value = messageResponse.content!;
+            url.value = messageResponse.url!;
+
+            Get.snackbar("Cấp cứu", messageResponse.content!);
+
+            //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            //   content: TextWidget(
+            //     label: error.toString(),
+            //   ),
+            //   backgroundColor: Colors.red,
+            // ));
+          }
         } catch (e) {}
       });
     });
-    initListNotification();
+    initListNotification(page.value);
   }
 
-  void initListNotification() async {
-    final response = await appointmentRepository.getNotification(1, 20);
+  void _scrollListener() {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      initListNotification(page.value++);
+    }
+  }
+
+  void initListNotification(int page) async {
+    final response = await appointmentRepository.getNotification(page);
 
     if (response.statusCode == 200) {
       // listBmi = response.data;
-      listNotification.clear();
-      listNotification.addAll(response.data);
+      if (page > 1) {
+        listNotification.addAll(response.data);
+      } else {
+        listNotification.clear();
+        listNotification.addAll(response.data);
+      }
     } else {
       // Xử lý khi API trả về lỗi
     }

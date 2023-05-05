@@ -29,19 +29,18 @@ class PersonalPage extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 50,
-                  backgroundImage: NetworkImage(
-                      'https://cdn1.vectorstock.com/i/1000x1000/31/95/user-sign-icon-person-symbol-human-avatar-vector-12693195.jpg'),
+                  backgroundImage: NetworkImage(personalController.avatar),
                   // radius: 24,
                 ),
                 Expanded(
                   child: Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                    child: Text(
-                      personalController.user?.fullName! ?? "",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
-                    ),
+                    child: Obx(() => Text(
+                          personalController.fullName.value,
+                          style: const TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.w900),
+                        )),
                   ),
                 ),
               ],

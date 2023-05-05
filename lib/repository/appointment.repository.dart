@@ -44,11 +44,10 @@ class AppointmentRepository {
 
   Future<NotificationResponse> getNotification(
     int? page,
-    int? pageSize,
   ) async {
     final queryParams = {
       'page': page ?? 1,
-      'pageSize': pageSize ?? 20,
+      'pageSize': 10,
     };
     // if (status != null) {
     //   queryParams['status'] = status;

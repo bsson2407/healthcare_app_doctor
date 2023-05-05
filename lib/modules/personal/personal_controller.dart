@@ -30,6 +30,7 @@ class PersonalController extends GetxController {
   var isCancelInsuranceNumber = true.obs;
   var isCancelDescription = true.obs;
   var isCancelSpecialize = true.obs;
+  var isCancelExperience = true.obs;
   var isLoadingButton = false.obs;
 
   DoctorLoginResponse? user;
@@ -74,8 +75,12 @@ class PersonalController extends GetxController {
         gender = user?.gender! ?? "";
         time = user?.dateOfBirth!;
         var inputFormat = DateFormat('dd/MM/yyyy').format(time!);
+        print("user?.avatar: ${user?.avatar}");
+
         dateController.text = inputFormat;
-        avatar = user?.avatar! ?? "";
+        avatar = user?.avatar! ??
+            "https://cdn1.vectorstock.com/i/1000x1000/31/95/user-sign-icon-person-symbol-human-avatar-vector-12693195.jpg";
+        print("avatar: $avatar");
       }
     } catch (err) {}
   }

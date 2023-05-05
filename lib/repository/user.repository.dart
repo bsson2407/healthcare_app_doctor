@@ -23,13 +23,17 @@ class UserRepository {
   // }
 
   Future<LoginResponse> loginUser(LoginRequest login) async {
-    Dio dios = new Dio();
-    // dio.options = BaseOptions();
+    // Dio dios = new Dio();
+    print("loginphone: ${login.phone}");
+    print("loginpassword: ${login.password}");
+    print("loginpassword: $domain/auth/user/login");
+    dio.options = BaseOptions(receiveTimeout: 60000, connectTimeout: 60000);
+
     // dio.options.headers['Authorization'] =
     //     "Bearer ${LocalStorageService.getAccessToken()}";
-    final response = await dios.post(
-        '$domain/auth/user/login',
+    final response = await dio.post('$domain/auth/user/login',
         data: {"phone": login.phone, "password": login.password});
+    print("response: ${response}");
 
     return LoginResponse.fromJson(response.data);
   }
@@ -47,15 +51,19 @@ class UserRepository {
 
   Future<PatientResponse> getPatients(
     int? page,
-    int? pageSize,
+    String? search
   ) async {
     final queryParams = {
       'page': page ?? 1,
-      'pageSize': pageSize ?? 20,
+      'pageSize': "10",
     };
     // if (status != null) {
     //   queryParams['status'] = status;
     // }
+
+    if(search != ""){
+      queryParams['search'] = search as String;
+    }
     dio.options = BaseOptions(receiveTimeout: 60000, connectTimeout: 60000);
     dio.options.headers['Authorization'] =
         "Bearer ${LocalStorageService.getAccessToken()}";
@@ -80,13 +88,32 @@ class UserRepository {
     dio.options.headers['Authorization'] =
         "Bearer ${LocalStorageService.getAccessToken()}";
 
-    final response = await dio.patch(
-        '$domain/user/change-password',
-        data: {
-          "oldPassword": oldPassword,
-          "newPassword": newPassword,
-          "confirmNewPassword": confirmNewPassword,
-        });
+    final response = await dio.patch('$domain/user/change-password', data: {
+      "oldPassword": oldPassword,
+      "newPassword": newPassword,
+      "confirmNewPassword": confirmNewPassword,
+    });
+
+    return response;
+  }
+
+  Future<Response> resetPassword(
+    String? phone,
+    String? newPassword,
+    String? confirmNewPassword,
+  ) async {
+    // if (status != null) {
+    //   queryParams['status'] = status;
+    // }
+    dio.options = BaseOptions();
+    dio.options.headers['Authorization'] =
+        "Bearer ${LocalStorageService.getAccessToken()}";
+
+    final response = await dio.patch('$domain/user/update-password', data: {
+      "phone": phone,
+      "newPassword": newPassword,
+      "confirmNewPassword": confirmNewPassword,
+    });
 
     return response;
   }
@@ -104,18 +131,16 @@ class UserRepository {
     dio.options.headers['Authorization'] =
         "Bearer ${LocalStorageService.getAccessToken()}";
     String formattedDate = DateFormat("yyyy-MM-dd").format(dateOfBirth);
-    final response = await dio.patch(
-        '$domain/doctor',
-        data: {
-          "fullName": fullName,
-          "address": address,
-          "gender": gender,
-          "dateOfBirth": formattedDate,
-          "experience": experience,
-          "specialize": specialize,
-          "workPlace": workPlace,
-          "description": description,
-        });
+    final response = await dio.patch('$domain/doctor', data: {
+      "fullName": fullName,
+      "address": address,
+      "gender": gender,
+      "dateOfBirth": formattedDate,
+      "experience": experience,
+      "specialize": specialize,
+      "workPlace": workPlace,
+      "description": description,
+    });
 
     return UserResponse.fromJson(response.data);
   }

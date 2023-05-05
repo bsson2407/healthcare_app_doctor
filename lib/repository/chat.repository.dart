@@ -91,11 +91,10 @@ class ChatRepository {
   Future<ChatResponse> getMessage(
     String id,
     int? page,
-    int? pageSize,
   ) async {
     final client = RestClient(dio);
 
-    return await client.getChat(id, pageSize ?? 1, page ?? 10);
+    return await client.getChat(id, 20, page ?? 1);
   }
 
   Future<MessageResponse> postMessage(String id, MessageRequest dto) async {

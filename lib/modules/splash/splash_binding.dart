@@ -4,6 +4,7 @@ import 'package:healthcare_app_doctor/repository/appointment.repository.dart';
 import 'package:healthcare_app_doctor/repository/chat.repository.dart';
 import 'package:healthcare_app_doctor/repository/health_record.repository.dart';
 import 'package:healthcare_app_doctor/repository/user.repository.dart';
+import 'package:healthcare_app_doctor/service/auth_service.dart';
 
 class SplashBinding extends Bindings {
   @override
@@ -13,5 +14,7 @@ class SplashBinding extends Bindings {
     Get.lazyPut(() => HealthRecordRepository(), fenix: true);
     Get.lazyPut(() => AppointmentRepository(), fenix: true);
     Get.lazyPut(() => ChatRepository(), fenix: true);
+    Get.lazyPut(() => AuthService(), fenix: true);
+
   }
 }

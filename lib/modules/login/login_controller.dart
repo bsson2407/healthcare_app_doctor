@@ -41,7 +41,9 @@ class LoginController extends GetxController {
           Get.offAllNamed(AppRoutes.MAIN_NAVIGATION);
         });
       } on DioError catch (e) {
-        EasyLoading.showError(e.response?.data['message']);
+        print(e.message);
+        EasyLoading.showError(e.message);
+        // EasyLoading.showError(e.response?.data['message']);
       }
     }
 

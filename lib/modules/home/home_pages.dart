@@ -31,15 +31,16 @@ class HomePage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
                   child: TextFormField(
-                    // controller: homeController.txtSearch,
+                    controller: homeController.searchController,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Tìm kiếm bệnh nhân",
                       // hintStyle: TextStyle(color: Colors.grey.shade400),
                       suffix: IconButton(
                         onPressed: () {
-                          // ApiCalls.apiCalls.newsApi(
-                          //     name: "${homeController.txtSearch.text}");
+                          print(231);
+                          homeController
+                              .initList(homeController.searchController.text);
                         },
                         icon: const Icon(
                           Icons.search,
@@ -64,6 +65,7 @@ class HomePage extends StatelessWidget {
           // color: Colors.grey.shade900,
           child: homeController.lstPatients.isNotEmpty
               ? ListView.builder(
+                  controller: homeController.scrollController,
                   itemCount: homeController.lstPatients.length,
                   itemBuilder: (context, index) {
                     return Slidable(

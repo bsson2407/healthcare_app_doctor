@@ -49,12 +49,24 @@ class LoginPage extends StatelessWidget {
                     () =>
                         _buildPasswordField(loginController.passwordController),
                   ),
-                  // loginController.isError
-                  //     ? Text(
-                  //         loginController.isError,
-                  //         style: TextStyle(color: Color.red),
-                  //       )
-                  //     : '',
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed(AppRoutes.PHONE_PASS_PAGE);
+                        },
+                        child: Text(
+                          "Quên mật khẩu".tr,
+                          style: primaryTextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 40),
                   _buildSignInButton(),
                   const SizedBox(height: 20),
@@ -108,9 +120,9 @@ class LoginPage extends StatelessWidget {
               ),
         onClick: () {
           // Get.offNamed(AppRoutes.MAIN_NAVIGATION);
-          String email = loginController.phoneController.text;
+          String phone = loginController.phoneController.text;
           String password = loginController.passwordController.text;
-          loginController.login(email, password);
+          loginController.login(phone, password);
         },
       ),
     );

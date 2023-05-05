@@ -1,1 +1,1 @@
-proguard-rules.pro
+-keep class **.zego.** { *; }

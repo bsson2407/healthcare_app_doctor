@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,6 +10,8 @@ import 'package:healthcare_app_doctor/service/local_storage_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+   await Firebase.initializeApp();
+
   await Get.putAsync(() => LocalStorageService.init());
   runApp(MyApp());
 }

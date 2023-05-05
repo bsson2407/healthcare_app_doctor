@@ -16,7 +16,18 @@ class MessagesPage extends StatelessWidget {
   var messagesController = Get.find<MessagesController>();
   DataConversationResponse? chat;
   var userId = LocalStorageService.getId();
-
+  final ScrollController scrollController = ScrollController();
+//  void _scrollListener() {
+//     print(
+//         "---scrollController.position.pixels--${scrollController.position.pixels}");
+//     print(
+//         "---scrollController.position.maxScrollExtent--${scrollController.position.maxScrollExtent}");
+//     if (scrollController.position.pixels ==
+//         scrollController.position.maxScrollExtent) {
+//       print("---.page.value.--${page.value++}");
+//       initListMessage(page.value++);
+//     }
+//   }
   // @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +39,8 @@ class MessagesPage extends StatelessWidget {
             () => Padding(
               padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
               child: ListView.builder(
+                controller: messagesController.scrollController,
+                reverse: true,
                 itemCount: messagesController.listMessage.length,
                 itemBuilder: (context, index) =>
                     Message(message: messagesController.listMessage[index]),

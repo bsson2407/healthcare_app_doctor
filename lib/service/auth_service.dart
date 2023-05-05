@@ -31,6 +31,29 @@ class AuthService extends GetxController {
     );
   }
 
+   Future<void> sendOtpPhoneNumber(String phone) async {
+    String phoneNumbers = "+84${phone.substring(1)}";
+
+    await _auth.verifyPhoneNumber(
+      phoneNumber: phoneNumbers,
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {
+        if (e.code == "invalid-phone-number") {
+          Get.snackbar("Error", "The phone number is not valid");
+        } else {
+          Get.snackbar("Error", "Something went wrong. Try again ${e.code}");
+        }
+      },
+      codeSent: (String verificationId, int? resendToken) {
+        this.verificationId.value = verificationId;
+        Get.toNamed(AppRoutes.OTP_PASS_PAGE, arguments: phone);
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+        this.verificationId.value = verificationId;
+      },
+    );
+  }
+
   Future<bool> verifyOTP(String otp) async {
     var credentials = await _auth.signInWithCredential(
         PhoneAuthProvider.credential(

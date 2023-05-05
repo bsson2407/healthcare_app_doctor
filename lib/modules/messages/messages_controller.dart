@@ -22,11 +22,12 @@ class MessagesController extends GetxController {
 
   RxList<DataMessageResponse> listMessage = RxList<DataMessageResponse>([]);
   var socketService = Get.find<SocketService>();
-
+  RxInt page = 1.obs;
   // @override
   @override
   void onInit() {
     super.onInit();
+    scrollController.addListener(_scrollListener);
 
     socketService.socket.onConnect((data) {
       socketService.socket.on('newMessage', (msg) {
@@ -35,14 +36,33 @@ class MessagesController extends GetxController {
           DataMessageResponse messageResponse =
               DataMessageResponse.fromJson(msg['data']);
 
-          listMessage.add(messageResponse);
+          listMessage.insert(0, messageResponse);
         } catch (e) {}
       });
     });
   }
 
+  void _scrollListener() async {
+    print(
+        "---scrollController.position.pixels--${scrollController.position.pixels}");
+    print(
+        "---scrollController.position.maxScrollExtent--${scrollController.position.maxScrollExtent}");
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
+      print("---.page.value.--${page.value++}");
+      final response = await chatRepository.getMessage(
+          LocalStorageService.getConversationId(), page.value++);
+      if (response.statusCode == 200) {
+        // listBmi = response.data;
+        listMessage.addAll(response.data);
+      } else {
+        // Xử lý khi API trả về lỗi
+      }
+    }
+  }
+
   void initListMessage(String id, Function onComplete) async {
-    final response = await chatRepository.getMessage(id, 1, 20);
+    final response = await chatRepository.getMessage(id, page.value);
 
     if (response.statusCode == 200) {
       // listBmi = response.data;
