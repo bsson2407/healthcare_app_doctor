@@ -20,6 +20,19 @@ class CalendarController extends GetxController {
     }
   }
 
+   Future<void> refreshListAppointment() async {
+    // Thực hiện công việc làm mới, ví dụ: gọi lại API hoặc thực hiện tác vụ khác
+
+    // Đợi một khoảng thời gian giả lập (ví dụ: 2 giây) để tải lại dữ liệu
+    await Future.delayed(Duration(seconds: 2));
+
+    // Đánh dấu làm mới hoàn thành bằng cách gọi phương thức refreshCompleted()
+    // refreshCompleted();
+
+    // Thực hiện các công việc cần thiết để làm mới dữ liệu
+    initListAppointment("CREATED", null);
+  }
+
   void refuseAppointment(String id) async {
     try {
       await appointmentRepository.refuseAppointment(id).then((value) {});

@@ -8,8 +8,8 @@ import 'package:healthcare_app_doctor/service/local_storage_service.dart';
 class AppointmentRepository {
   final dio = Dio(); // Provide a dio instance
 
-//  String domain = "http://10.0.2.2:5000/v1";
-  String domain = "https://healthcarebe-production.up.railway.app/v1";
+ String domain = "http://10.0.2.2:5000/v1";
+  // String domain = "https://healthcarebe-production.up.railway.app/v1";
 
   Future<AppointmentResponse> getAppointmentDoctor(
     int? page,
@@ -72,6 +72,18 @@ class AppointmentRepository {
   Future<AppointmentGetResponse> refuseAppointment(String id) async {
     final client = RestClient(dio);
     return await client.refuseAppointment(id);
+  }
+
+  Future<Response> readAllNotification() async {
+    dio.options = BaseOptions(receiveTimeout: 60000, connectTimeout: 60000);
+    dio.options.headers['Authorization'] =
+        "Bearer ${LocalStorageService.getAccessToken()}";
+
+    final response = await dio.put(
+      '$domain/notification/read-all',
+    );
+
+    return response;
   }
 
   Future<AppointmentGetResponse> approveAppointment(String id) async {

@@ -255,7 +255,14 @@ Future<dynamic> selectFile() {
                       .pickFiles(
                           type: FileType.custom,
                           allowMultiple: false,
-                          allowedExtensions: ['xls', 'xlsx', 'doc']);
+                          allowedExtensions: [
+                        'xls',
+                        'xlsx',
+                        'doc',
+                        "pdf",
+                        'docx',
+                        'csv'
+                      ]);
                 },
                 child: Card(
                     elevation: 5,

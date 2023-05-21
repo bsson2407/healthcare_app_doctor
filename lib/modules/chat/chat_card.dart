@@ -45,7 +45,7 @@ class ChatCard extends StatelessWidget {
                   //   children: [
                   CircleAvatar(
                     radius: 35,
-                    backgroundImage: NetworkImage(
+                    backgroundImage: NetworkImage(user?.avatar ??
                         "https://thumbs.dreamstime.com/b/male-avatar-icon-flat-style-male-user-icon-cartoon-man-avatar-hipster-vector-stock-91462914.jpg"),
                   ),
                   // if (chat.isActive)

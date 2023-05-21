@@ -10,8 +10,8 @@ import 'package:intl/intl.dart';
 
 class UserRepository {
   final dio = Dio(); // Provide a dio instance
-  // String domain = "http://10.0.2.2:5000/v1";
-  String domain = "https://healthcarebe-production.up.railway.app/v1";
+  String domain = "http://10.0.2.2:5000/v1";
+  // String domain = "https://healthcarebe-production.up.railway.app/v1";
   Future<UserResponse> getMe() async {
     final client = RestClient(dio);
     return await client.getMe();

@@ -59,7 +59,7 @@ class AppointmentItem extends StatelessWidget {
                 foregroundColor: Colors.white,
                 icon: Icons.check,
                 onPressed: (_) {
-                  calendarController.refuseAppointment(data?.id);
+                  calendarController.approveAppointment(data?.id);
                 },
               ),
               SlidableAction(
@@ -67,7 +67,7 @@ class AppointmentItem extends StatelessWidget {
                 foregroundColor: Colors.white,
                 icon: Icons.delete,
                 onPressed: (_) {
-                  calendarController.approveAppointment(data?.id);
+                  calendarController.refuseAppointment(data?.id);
                 },
               )
             ],

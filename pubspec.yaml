@@ -56,7 +56,6 @@ dependencies:
   zego_uikit_prebuilt_call: ^3.1.0
   chewie: ^1.4.0
   pinput: ^2.2.31
- 
 dev_dependencies:
   flutter_test:
     sdk: flutter

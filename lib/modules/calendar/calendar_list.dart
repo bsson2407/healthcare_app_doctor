@@ -10,10 +10,13 @@ class CalendarList extends StatelessWidget {
   Widget build(BuildContext context) {
     calendarController.initListAppointment("CREATED", null);
     return Scaffold(
-      body: SingleChildScrollView(
-          child: Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
-              child: getAppointmentList())),
+      body: RefreshIndicator(
+        onRefresh: () => calendarController.refreshListAppointment(),
+        child: SingleChildScrollView(
+            child: Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: getAppointmentList())),
+      ),
     );
   }
 

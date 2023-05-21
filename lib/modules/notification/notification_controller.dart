@@ -9,6 +9,9 @@ class NotificationController extends GetxController {
   final appointmentRepository = Get.find<AppointmentRepository>();
   RxList<DataNotificationResponse> listNotification =
       RxList<DataNotificationResponse>([]);
+
+  RxList<DataNotificationResponse> listNotificationNotRead =
+      RxList<DataNotificationResponse>([]);
   var socketService = Get.find<SocketService>();
   RxBool isNoti = false.obs;
   RxString content = "".obs;
@@ -26,10 +29,12 @@ class NotificationController extends GetxController {
           DataNotificationResponse messageResponse =
               DataNotificationResponse.fromJson(msg['data']);
           // initListNotification();
-          listNotification.add(messageResponse);
+          listNotification.insert(0, messageResponse);
+
+          listNotificationNotRead.add(messageResponse);
+          // isNoti.value = true;
 
           if (messageResponse.typeNotification == "EMERGENCY") {
-            isNoti.value = true;
             content.value = messageResponse.content!;
             url.value = messageResponse.url!;
 
@@ -55,6 +60,16 @@ class NotificationController extends GetxController {
     }
   }
 
+  void readAll() {
+    appointmentRepository
+        .readAllNotification()
+        .then((value) => listNotificationNotRead.clear());
+  }
+
+  // void isRead() {
+  //   isNoti.value = false;
+  // }
+
   void initListNotification(int page) async {
     final response = await appointmentRepository.getNotification(page);
 
@@ -68,6 +83,14 @@ class NotificationController extends GetxController {
       }
     } else {
       // Xử lý khi API trả về lỗi
+    }
+    print("listNotification.length:${listNotification.length}");
+    for (var i = 0; i < listNotification.length; i++) {
+      print("listNotification.isRead:${listNotification[i].isRead}");
+
+      if (listNotification[i].isRead == false) {
+        listNotificationNotRead.add(listNotification[i]);
+      }
     }
   }
 }

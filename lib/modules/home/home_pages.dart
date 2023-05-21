@@ -101,11 +101,12 @@ class HomePage extends StatelessWidget {
                 // const Padding(
                 //   padding: EdgeInsets.all(5),
                 // child:
-                const ClipOval(
+                ClipOval(
                   child: Image(
                     height: 90,
                     width: 90,
-                    image: AssetImage('assets/images/user.jpg'),
+                    image: NetworkImage(user.avatar ??
+                        "https://thumbs.dreamstime.com/b/male-avatar-icon-flat-style-male-user-icon-cartoon-man-avatar-hipster-vector-stock-91462914.jpg"),
                     fit: BoxFit.fill,
                   ),
                 ),

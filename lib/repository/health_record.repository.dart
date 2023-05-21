@@ -5,8 +5,8 @@ import 'package:healthcare_app_doctor/service/local_storage_service.dart';
 
 class HealthRecordRepository {
   final dio = Dio(); // Provide a dio instance
-  // String domain = "http://10.0.2.2:5000/v1";
-  String domain = "https://healthcarebe-production.up.railway.app/v1";
+  String domain = "http://10.0.2.2:5000/v1";
+  // String domain = "https://healthcarebe-production.up.railway.app/v1";
 
   Future<HealthRecordResponse> getHealthRecordPatient(
       int? page, int? pageSize, String? patientId) async {

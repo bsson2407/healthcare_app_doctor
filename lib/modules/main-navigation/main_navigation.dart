@@ -4,20 +4,13 @@ import 'package:healthcare_app_doctor/modules/calendar/calendar_page.dart';
 import 'package:healthcare_app_doctor/modules/chat/chat_page.dart';
 import 'package:healthcare_app_doctor/modules/home/home_pages.dart';
 import 'package:healthcare_app_doctor/modules/main-navigation/main_navigation_controller.dart';
+import 'package:healthcare_app_doctor/modules/notification/notification_controller.dart';
 import 'package:healthcare_app_doctor/modules/notification/notification_pages.dart';
 import 'package:healthcare_app_doctor/modules/personal/personal_pages.dart';
 
-
 class MainNavigation extends StatelessWidget {
-
   int selectedPage = 0;
-  final pages = [
-    HomePage(),
-    ChatPage(),
-    Container(),
-    NotificationPage(),
-    PersonalPage()
-  ];
+  var notiController = Get.find<NotificationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,25 +29,12 @@ class MainNavigation extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          // unselectedItemColor: Colors.black,
-          // selectedItemColor: Colors.redAccent,
           onTap: controller.changeTabIndex,
           currentIndex: controller.tabIndex,
-
           showSelectedLabels: true,
-          // showUnselectedLabels: false,
-          // type: BottomNavigationBarType.fixed,
-          // backgroundColor: Colors.white,
-          // elevation: 0,
           type: BottomNavigationBarType.fixed,
-          // currentIndex: selectedPage,
           fixedColor: Colors.blueAccent,
           unselectedItemColor: Color(0xFF757575),
-          // onTap: (position) {
-          //   setState(() {
-          //     selectedPage = position;
-          //   });
-          // },
           items: [
             _bottomNavigationBarItem(
               icon: Icons.home,
@@ -83,40 +63,50 @@ class MainNavigation extends StatelessWidget {
   }
 
   _bottomNavigationBarItem({IconData? icon, String? label}) {
-    return BottomNavigationBarItem(
-      icon: Icon(icon),
-      label: label,
-    );
+    if (label == 'Thông báo') {
+      return BottomNavigationBarItem(
+        icon: Obx(
+          () => Stack(
+            children: [
+              Icon(icon),
+              notiController.listNotificationNotRead.isNotEmpty
+                  ? Positioned(
+                      right: 0,
+                      top: 0,
+                      child: Container(
+                        padding: EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        constraints: BoxConstraints(
+                          minWidth: 14,
+                          minHeight: 14,
+                        ),
+                        child: Text(
+                          notiController.listNotificationNotRead.length <= 5
+                              ? "${notiController.listNotificationNotRead.length}"
+                              : "5+",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    )
+                  : SizedBox(),
+            ],
+          ),
+        ),
+        label: label,
+      );
+    } else {
+      return BottomNavigationBarItem(
+        icon: Icon(icon),
+        label: label,
+      );
+    }
   }
 }
-
-
-//  body: ,
-//       bottomNavigationBar: BottomNavigationBar(
-//           type: BottomNavigationBarType.fixed,
-//           currentIndex: selectedPage,
-//           fixedColor: Colors.blueAccent,
-//           unselectedItemColor: Color(0xFF757575),
-//           onTap: (position) {
-//             setState(() {
-//               selectedPage = position;
-//             });
-//           },
-//           items: [
-//             _bottomNavigationBarItem(
-//               icon: Icons.home,
-//               label: 'Trang chủ',
-//             ),
-//             _bottomNavigationBarItem(
-//               icon: Icons.message,
-//               label: 'Hội thoại',
-//             ),
-//             _bottomNavigationBarItem(
-//               icon: Icons.local_hospital,
-//               label: 'Bác sĩ',
-//             ),
-//             _bottomNavigationBarItem(
-//               icon: Icons.person,
-//               label: 'Cá nhân',
-//             ),
-//           ]),

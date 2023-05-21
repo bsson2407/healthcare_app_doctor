@@ -13,8 +13,8 @@ import 'package:image_picker/image_picker.dart';
 
 class ChatRepository {
   final dio = Dio(); // Provide a dio instance
-// String domain = "http://10.0.2.2:5000/v1";
-  String domain = "https://healthcarebe-production.up.railway.app/v1";
+String domain = "http://10.0.2.2:5000/v1";
+  // String domain = "https://healthcarebe-production.up.railway.app/v1";
   Future<ConversationResponse> getAllConversation(
     int? page,
     int? pageSize,

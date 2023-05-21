@@ -11,6 +11,8 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("readAll");
+    notificationController.readAll();
     return Scaffold(
         appBar: AppBar(
           elevation: 0,

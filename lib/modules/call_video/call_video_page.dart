@@ -12,11 +12,11 @@ class CallScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ZegoUIKitPrebuiltCall(
         appID:
-            909621478, // Fill in the appID that you  get from ZEGOCLOUD Admin Console.
+            1643966043, // Fill in the appID that you  get from ZEGOCLOUD Admin Console.
         appSign:
-            "111b58d37fa7d7903d411169d42a0d92671455cde73e341869b65f650174c669", // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
+            "82e5f91825f928c7d51f38617860c8a18ca36e33752c333428c84623a8d176aa", // Fill in the appSign that you get from ZEGOCLOUD Admin Console.
         userID: LocalStorageService.getId(),
-        userName: 'patient',
+        userName: 'doctor',
         callID: LocalStorageService.getConversationCallId(),
         // You can also use groupVideo/groupVoice/oneOnOneVoice to make more types of calls.
         config: ZegoUIKitPrebuiltCallConfig.groupVideoCall()
